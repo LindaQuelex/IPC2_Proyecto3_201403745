@@ -2,11 +2,12 @@ from flask import Flask, request
 from manage import Manager
 from flask.json import jsonify
 from xml.etree import ElementTree as ET
-
+from LISTAEMPRESAS import ListaEmpresas
 
 app=Flask(__name__)
 
 manager=Manager()
+empresas=ListaEmpresas()
 
 @app.route('/')
 def index():
@@ -44,15 +45,14 @@ def alamacenar_datos_xml():
                         for nombreoservicio in empresa:
                             if nombreoservicio.tag=='nombre':
                                 nombre_empresa=nombreoservicio.text
-                                #LISTA DE EMPRESAS INSERTAR
+                                empresas.inserta_al_final_empresa(nombre_empresa)
                             if nombreoservicio.tag=='servicio':
                                 servicio= nombreoservicio.attrib['nombre']
-                                #agregar a la lista empresas la lista de servicios
+                                empresas.retornarNodoEmpresa(contadorcinco).Lista_servicios.inserta_al_final_servicio(servicio)
                                 contadorsiete=0
                                 for alias in nombreoservicio:
                                     aliasservicio=alias.text
-                                #agregar a la lista servicio los alias
-
+                                    empresas.retornarNodoEmpresa(contadorcinco).Lista_servicios.retornar_nodo_servicio(contadorseis).lista_alias.inserta_al_final_alias(aliasservicio)
                                 contadorsiete+=1
                             contadorseis+=1
                         contadorcinco+=1
@@ -64,7 +64,11 @@ def alamacenar_datos_xml():
                 manager.add_mensajes(mensaje)
                 contadorocho+=1
         contador+=1
-                
+
+
+    empresas.mostrar_empresas()    
+        
+            
     return jsonify ({'msg':'prueba de funcionamiento de del método "almacenar_datos_xml" de la API'}),200
 
 @app.route('/showpositivos', methods=['GET'])

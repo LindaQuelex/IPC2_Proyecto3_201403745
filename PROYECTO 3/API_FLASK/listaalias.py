@@ -38,9 +38,8 @@ class ListaAlias():
     def retornar_nodo(self, id):
         aux=self.primero
         while aux.getidalias()< id:
-       
             aux=aux.getsiguiente()
-        print(aux.idalias, aux.alias)
+        #print(aux.idalias, aux.alias)
         return aux
 
 

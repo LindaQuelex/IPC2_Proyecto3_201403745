@@ -17,13 +17,12 @@ class ListaServicios():
         else:
            self.ultimo.setsiguiente(nuevoservicio)
            self.ultimo=nuevoservicio
-           nuevoservicio.nuevoalias
-        nuevoservicio.listaceldas.inserta_al_final_celda
+        nuevoservicio.lista_alias.inserta_al_final_alias
         return nuevoservicio
 
     def retornar_nodo_servicio(self, id):
         aux=self.primero
-        while aux.getidservicio()< id:
+        while aux.getidservicio()<id:
             aux=aux.getsiguiente()
         return aux
 
@@ -34,4 +33,4 @@ class ListaServicios():
             tmp.lista_alias.mostrar_alias()
             tmp = tmp.getsiguiente()
     
-   
+

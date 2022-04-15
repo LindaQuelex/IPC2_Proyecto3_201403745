@@ -17,8 +17,8 @@ class NodoEmpresa():
     def getnombre_empresa(self):
         return self.nombre_empresa
     
-    def setnombre_empresa(self, nombreempresa):
-        self.nombre_empresa= nombreempresa
+    def setnombre_empresa(self, nombre_empresa):
+        self.nombre_empresa= nombre_empresa
 
     def getsiguiente(self):
         return self.siguiente
