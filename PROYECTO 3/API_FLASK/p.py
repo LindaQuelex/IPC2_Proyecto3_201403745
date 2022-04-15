@@ -13,11 +13,19 @@ class sent_negativos():
         return self
 
 class empresa():
-    def __init__(self, nombre, servicio):
+    def __init__(self, nombre):
         self.nombre=nombre
-        self.servicio=servicio
-
+        self.lista_servicios=[]
+        
     def getnombre_empresa(self):
+        return self
+
+class servicioem():
+    def __init__(self, servicios):
+        self.servicios=servicios
+        self.lista_aliasservicios=[]
+
+    def getservicio(self):
         return self
 
 class alias_servicioem():
@@ -33,3 +41,7 @@ class mensajes():
 
     def getmensaje(self):
         return self
+
+
+
+

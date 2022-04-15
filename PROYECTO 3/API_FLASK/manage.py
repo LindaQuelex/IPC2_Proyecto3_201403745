@@ -20,15 +20,33 @@ class Manager():
 
     def add_alias_servicio(self, alias_servicio):
         nuevo=alias_servicioem(alias_servicio)
-        self.lista_negativos.append(nuevo)
+        self.lista_alias_servicio.append(nuevo)
         return True
 
-    def add_empresas(self, nombre,servicio):
-        nuevo=empresa(nombre,servicio)
-        self.lista_negativos.append(nuevo)
+    def add_empresas(self, nombre):
+        nuevo=empresa(nombre)
+        self.lista_empresas.append(nuevo)
         return True
+
+
+    # def retornarempresa(self, id):
+    #     #self.lista_empresas(len(id))
+
+    #     for x in range(len(id)):
+    #         if id[x]>=18:
+    #             print(id[x])
 
     def add_mensajes(self, mensaje):
         nuevo=mensajes(mensaje)
         self.lista_mensajes.append(nuevo)
         return True
+
+    def get_sentimientos_positivos(self):
+        json=[]
+        for k in self.lista_positivos:
+            positivos={
+                'palabra': k.sen_positivos,
+
+            }
+            json.append(positivos)
+        return json
