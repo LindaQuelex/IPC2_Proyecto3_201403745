@@ -44,7 +44,7 @@ def alamacenar_datos_xml():
                         for nombreoservicio in empresa:
                             if nombreoservicio.tag=='nombre':
                                 nombre_empresa=nombreoservicio.text
-                                manager.add_empresas(nombre_empresa)
+                                #LISTA DE EMPRESAS INSERTAR
                             if nombreoservicio.tag=='servicio':
                                 servicio= nombreoservicio.attrib['nombre']
                                 #agregar a la lista empresas la lista de servicios
