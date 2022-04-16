@@ -3,6 +3,7 @@ from NODOSERVICIO import NodoServicio
 
 class ListaServicios():
     def __init__(self):
+        self.iniciarnodoservicio=None
         self.primero: NodoServicio= None
         self.ultimo=None
         self.size = 0
@@ -18,6 +19,7 @@ class ListaServicios():
            self.ultimo.setsiguiente(nuevoservicio)
            self.ultimo=nuevoservicio
         nuevoservicio.lista_alias.inserta_al_final_alias
+        self.iniciarnodoservicio=nuevoservicio
         return nuevoservicio
 
     def retornar_nodo_servicio(self, id):
@@ -34,6 +36,25 @@ class ListaServicios():
             tmp.lista_alias.mostrar_alias()
             tmp = tmp.getsiguiente()
     
+    
+    # def recorrer_lista(self):
+    #     if self.iniciarnodoservicio is None:
+    #         print("La lista no tiene elementos")
+    #         return
+    #     else:
+    #         nuevo = self.iniciarnodoservicio
+    #         while nuevo is not None:
+    #             print("La lista de celdas es:",nuevo.nuevoservicio, "funciona el método de recorrer lista")    
+    #             nuevo = nuevo.siguiente
+                
+    def retornarNombreServicio(self,id):
+        aux = self.primero
+        while aux.getidservicio()<id:
+            aux=aux.getsiguiente()
+        nombreservicio=aux.servicio
+        return nombreservicio
+
+
 
 
 # nodo=ListaServicios()
@@ -49,3 +70,4 @@ class ListaServicios():
 # nodo.mostrar_servicios()
 
 # nodo.retornar_nodo_servicio(1)
+

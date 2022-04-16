@@ -88,40 +88,48 @@ def alamacenar_datos_xml():
     print(mensaje_analizar)
     # manager.retornar_mensaje(1)
     serch_empresa= re.findall(name_empresa,mensaje_analizar, flags=re.IGNORECASE)
-    print(serch_empresa)
+    print('La empresa a analizar es:', serch_empresa)
     cantidad_empresa=len(re.findall(name_empresa,mensaje_analizar, flags=re.IGNORECASE))
-    print(cantidad_empresa)
+    print('cantidad de repeticiones de la empresa en el mensaje=',cantidad_empresa)
     if cantidad_empresa>0:
         print('Se analizará el mensaje', idmensaje,'porque se si se menciona a la empresa')
-#buscar servicio en el mensaje
+        #OBTENER EL TAMAÑO DE LA LISTA SERVICIO PARA USAR WHILE Y LO HAGA CON TODOS LOS SERVICIOS 
+        idservicio=0
+        name_servicio=empresas.retornarNodoEmpresa(idempresa).Lista_servicios.retornarNombreServicio(idservicio)
+        print('El servicio a buscar es:', name_servicio)
+        serch_servicio=re.findall(name_servicio,mensaje_analizar, flags=re.IGNORECASE)
+        repeticiones_servicio=len(re.findall(name_servicio,mensaje_analizar, flags=re.IGNORECASE))
+        print('cantidad de repeticiones del servicio en el mensaje:', repeticiones_servicio)
+        #FALTA ANALIZAR LOS ALIAS 
+        
+        if repeticiones_servicio>0:
+            #print(manager.get_sentimientos_positivos())
+            tam_lista_positivos=manager.tamaño_lista_positivos()
+            print('Total de palabras positivas a buscar=',tam_lista_positivos)
+            conteopositivos=0
+            idpositivo=0
+            while idpositivo< tam_lista_positivos:
+                positivo=positivos.retornar_nodo(idpositivo)
+                print('palabra positiva a buscar=',positivo)
+                serch_positivos_msg= len(re.findall(positivo,mensaje_analizar, flags=re.IGNORECASE))
+                print('cantidad de veces encontradas=',serch_positivos_msg)
+                idpositivo+=1
+                conteopositivos+=serch_positivos_msg
+            totalpositivos=conteopositivos
+            print('TOTAL DE POSITIVOS EN EN MENSAJE=',totalpositivos)
 
-        #print(manager.get_sentimientos_positivos())
-        tam_lista_positivos=manager.tamaño_lista_positivos()
-        print('Total de palabras positivas a buscar=',tam_lista_positivos)
-        conteopositivos=0
-        idpositivo=0
-        while idpositivo< tam_lista_positivos:
-            positivo=positivos.retornar_nodo(idpositivo)
-            print('palabra positiva a buscar=',positivo)
-            serch_positivos_msg= len(re.findall(positivo,mensaje_analizar, flags=re.IGNORECASE))
-            print('cantidad de veces encontradas=',serch_positivos_msg)
-            idpositivo+=1
-            conteopositivos+=serch_positivos_msg
-        totalpositivos=conteopositivos
-        print('TOTAL DE POSITIVOS EN EN MENSAJE=',totalpositivos)
-
-          
+            
 
 
-        tam_lista_negativos=manager.tamaño_lista_negativos()
-        print('Total de palabra negativas a buscar=',tam_lista_negativos)
-        idnegativo=0
-        while idnegativo<tam_lista_negativos:
-            negativo=negativos.retornar_nodo(idnegativo)
-            print('palabra negativa a buscar=',negativo)
-            serch_negativo_msg= len(re.findall(negativo,mensaje_analizar, flags=re.IGNORECASE))
-            print('cantidad de veces encontradas=',serch_negativo_msg)
-            idnegativo+=1
+            tam_lista_negativos=manager.tamaño_lista_negativos()
+            print('Total de palabra negativas a buscar=',tam_lista_negativos)
+            idnegativo=0
+            while idnegativo<tam_lista_negativos:
+                negativo=negativos.retornar_nodo(idnegativo)
+                print('palabra negativa a buscar=',negativo)
+                serch_negativo_msg= len(re.findall(negativo,mensaje_analizar, flags=re.IGNORECASE))
+                print('cantidad de veces encontradas=',serch_negativo_msg)
+                idnegativo+=1
         
         
     else: 
