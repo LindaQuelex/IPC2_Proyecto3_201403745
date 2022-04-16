@@ -67,6 +67,7 @@ def alamacenar_datos_xml():
 
 
     empresas.mostrar_empresas()    
+    manager.lista_positivos[0]
         
             
     return jsonify ({'msg':'prueba de funcionamiento de del método "almacenar_datos_xml" de la API'}),200

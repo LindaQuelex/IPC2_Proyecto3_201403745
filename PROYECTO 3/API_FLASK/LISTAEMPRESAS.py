@@ -28,7 +28,7 @@ class ListaEmpresas():
     def mostrar_empresas(self):
         tmp=self.primero
         for i in range(self.size):
-            print(i,'\n','El nombre de la empresa es:', tmp.getnombre_empresa())
+            print(i,'El nombre de la empresa es:', tmp.getnombre_empresa())
             tmp.Lista_servicios.mostrar_servicios()
             tmp = tmp.getsiguiente()
 

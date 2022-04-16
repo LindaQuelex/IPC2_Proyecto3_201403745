@@ -30,7 +30,7 @@ class ListaServicios():
     def mostrar_servicios(self):
         tmp=self.primero
         for i in range(self.size):
-            print(i,'\n','Servicio',tmp.getservicio())
+            print(i,'Servicio:',tmp.getservicio())
             tmp.lista_alias.mostrar_alias()
             tmp = tmp.getsiguiente()
     
