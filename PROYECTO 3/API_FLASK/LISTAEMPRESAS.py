@@ -32,5 +32,13 @@ class ListaEmpresas():
             tmp.Lista_servicios.mostrar_servicios()
             tmp = tmp.getsiguiente()
 
+    def retornarNombreEmpresa(self,id):
+        aux = self.primero
+        while aux.getidempresa()<id:
+            aux=aux.getsiguiente()
+        nombreempresa=aux.nombre_empresa
+        return nombreempresa
+
+
 
 

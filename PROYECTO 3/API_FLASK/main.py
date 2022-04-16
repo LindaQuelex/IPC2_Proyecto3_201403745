@@ -3,11 +3,16 @@ from manage import Manager
 from flask.json import jsonify
 from xml.etree import ElementTree as ET
 from LISTAEMPRESAS import ListaEmpresas
+from LISTAMENSAJES import ListaMsg
+from LISTAPOSITIVOS import ListaPositivos
+import re
 
 app=Flask(__name__)
 
 manager=Manager()
 empresas=ListaEmpresas()
+msg=ListaMsg()
+positivos=ListaPositivos()
 
 @app.route('/')
 def index():
@@ -31,6 +36,7 @@ def alamacenar_datos_xml():
                     for sentimientopositivo in tipo_diccionario:
                         palabra_positiva=sentimientopositivo.text
                         manager.add_positivos(palabra_positiva)
+                        positivos.inserta_al_final_positivos(palabra_positiva)
                         contadortres+=1
                 if tipo_diccionario.tag=='sentimientos_negativos':
                     contadorcuatro=0
@@ -62,13 +68,62 @@ def alamacenar_datos_xml():
             for mensajes in diccionario_mensajes:
                 mensaje=mensajes.text
                 manager.add_mensajes(mensaje)
+                msg.inserta_al_final_mensaje(mensaje)
                 contadorocho+=1
         contador+=1
 
-
-    empresas.mostrar_empresas()    
-    manager.lista_positivos[0]
+    #empresas.mostrar_empresas()   #prueba de datos cargados en TDA´s
+    #ENCONTRAR NOMBRE DE EMPRESA
+    idempresa=0
+    name_empresa=empresas.retornarNombreEmpresa(idempresa)
+    print(name_empresa)
+    # name=name_empresa.lower()
+    # print(name)
+    tam_list_mensajes=manager.tamaño_lista_mensajes()
+    idmensaje=0
+    mensaje_analizar=msg.retornar_nodo(idmensaje)
+    print(mensaje_analizar)
+    # manager.retornar_mensaje(1)
+    serch_empresa= re.findall(name_empresa,mensaje_analizar, flags=re.IGNORECASE)
+    print(serch_empresa)
+    cantidad_empresa=len(re.findall(name_empresa,mensaje_analizar, flags=re.IGNORECASE))
+    print(cantidad_empresa)
+    if cantidad_empresa>0:
+        contadorempresa=1
+        print('Se analizará el mensaje', idmensaje,'porque se si se menciona a la empresa')
+        print(manager.get_sentimientos_positivos())
+        tam_lista_positivos=manager.tamaño_lista_positivos()
+        print(tam_lista_positivos)
+        idpositivo=0
+        while idpositivo< tam_lista_positivos:
+            positivo=positivos.retornar_nodo(idpositivo)
+            print('palabra positivia a buscar=',positivo)
+            serch_positivos_msg= len(re.findall(positivo,mensaje_analizar, flags=re.IGNORECASE))
+            print('cantidad de veces encontradas=',serch_positivos_msg)
+            idpositivo+=1
         
+
+
+
+
+
+    else: 
+        print('No se analiza el msg',idmensaje,'porque no existe mencion')
+
+
+
+    # serch_fecha= r''
+
+    # quitar=",;:.\n!¡\"'"
+    # for caracter in quitar:
+    #     mensaje_analizar=mensaje_analizar.replace(caracter,"")
+
+
+  
+    # print(manager.get_sentimientos_positivos())
+    # print(manager.get_sentimientos_negativos())
+    # print(manager.get_mensajes())
+
             
     return jsonify ({'msg':'prueba de funcionamiento de del método "almacenar_datos_xml" de la API'}),200
 

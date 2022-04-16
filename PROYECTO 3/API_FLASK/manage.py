@@ -29,3 +29,39 @@ class Manager():
             }
             json.append(positivos)
         return json
+    
+    def get_sentimientos_negativos(self):
+        json=[]
+        for k in self.lista_negativos:
+            negativos={
+                'palabra': k.sen_negativos,
+            }
+            json.append(negativos)
+        return json
+
+    def get_mensajes(self):
+        json=[]
+        for k in self.lista_mensajes:
+            mensaje={
+                'mensaje': k.mensaje,
+            }
+            json.append(mensaje)
+        return json
+
+    def tamaño_lista_mensajes(self):
+        size_lista_mensajes= len(self.lista_mensajes)
+        return size_lista_mensajes
+        #print(size_lista_mensajes)
+
+    def tamaño_lista_positivos(self):
+        size_lista_positivos= len(self.lista_positivos)
+        return size_lista_positivos
+        #print(size_lista_mensajes)
+    
+    def retornar_mensaje(self, id):
+        mensaje=self.lista_mensajes[id]
+        return mensaje
+  
+        
+        
+        
