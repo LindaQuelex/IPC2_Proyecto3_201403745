@@ -42,21 +42,21 @@ def alamacenar_datos_xml():
                     contadorcinco=0
                     for empresa in tipo_diccionario:
                         contadorseis=0
-                        for nombreoservicio in empresa:
-                            if nombreoservicio.tag=='nombre':
-                                nombre_empresa=nombreoservicio.text
+                        for nombreoservicioempresa in empresa:
+                            if nombreoservicioempresa.tag=='nombre':
+                                nombre_empresa=nombreoservicioempresa.text
                                 empresas.inserta_al_final_empresa(nombre_empresa)
-                            if nombreoservicio.tag=='servicio':
-                                servicio= nombreoservicio.attrib['nombre']
+                            if nombreoservicioempresa.tag=='servicio':
+                                servicio= nombreoservicioempresa.attrib['nombre']
                                 empresas.retornarNodoEmpresa(contadorcinco).Lista_servicios.inserta_al_final_servicio(servicio)
                                 contadorsiete=0
-                                for alias in nombreoservicio:
+                                for alias in nombreoservicioempresa:
                                     aliasservicio=alias.text
                                     empresas.retornarNodoEmpresa(contadorcinco).Lista_servicios.retornar_nodo_servicio(contadorseis).lista_alias.inserta_al_final_alias(aliasservicio)
-                                contadorsiete+=1
-                            contadorseis+=1
+                                    contadorsiete=+1    
+                                contadorseis+=1
                         contadorcinco+=1
-                contadordos+=1        
+                    contadordos+=1        
         if diccionario_mensajes.tag=='lista_mensajes':
             contadorocho=0
             for mensajes in diccionario_mensajes:

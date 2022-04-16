@@ -26,6 +26,13 @@
                 </servicio>
                 <servicio nombre="graduación"> </servicio>
             </empresa>
+            <empresa>
+                <nombre> IGSS </nombre>
+                <servicio nombre="actualización">
+                    <alias> actualizó </alias>
+                    <alias> actualiza </alias>
+                </servicio>
+            </empresa>
         </empresas_analizar>
     </diccionario>
     <lista_mensajes>

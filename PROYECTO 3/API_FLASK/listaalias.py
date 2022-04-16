@@ -9,7 +9,7 @@ class ListaAlias():
 
     def inserta_al_final_alias(self, alias):
         nuevoalias=NodoAlias(alias)
-        nuevoalias.setidalias(self.size)
+        #nuevoalias.setidalias(self.size)
         self.size += 1 
         if self.primero is None:
             self.primero=nuevoalias
@@ -19,15 +19,15 @@ class ListaAlias():
            self.ultimo=nuevoalias
         return nuevoalias
 
-    def recorrer_lista(self):
-        if self.iniciarnodoalias is None:
-            print("La lista no tiene alias del servicio")
-            return
-        else:
-            nuevo = self.iniciarnodoalias
-            while nuevo is not None:
-                print("La lista de alias del servicios es:",nuevo.alias , "funciona el método de recorrer lista")    
-                nuevo = nuevo.siguiente
+    # def recorrer_lista(self):
+    #     if self.iniciarnodoalias is None:
+    #         print("La lista no tiene alias del servicio")
+    #         return
+    #     else:
+    #         nuevo = self.iniciarnodoalias
+    #         while nuevo is not None:
+    #             print("La lista de alias del servicios es:",nuevo.alias , "funciona el método de recorrer lista")    
+    #             nuevo = nuevo.siguiente
 
     def mostrar_alias(self):
         tmp=self.primero
