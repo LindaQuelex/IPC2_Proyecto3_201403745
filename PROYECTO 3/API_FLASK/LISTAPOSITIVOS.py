@@ -19,7 +19,7 @@ class ListaPositivos():
            self.ultimo=nuevapalabrapositiva
         return nuevapalabrapositiva
 
-    def mostrar_mensaje(self):
+    def mostrar_positivos(self):
         tmp=self.primero
         for i in range(self.size):
             print("     ",i,'La palabra positiva es:', tmp.getpalabrapositiva())

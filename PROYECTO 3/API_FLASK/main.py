@@ -5,6 +5,7 @@ from xml.etree import ElementTree as ET
 from LISTAEMPRESAS import ListaEmpresas
 from LISTAMENSAJES import ListaMsg
 from LISTAPOSITIVOS import ListaPositivos
+from LISTANEGATIVOS import ListaNegativos
 import re
 
 app=Flask(__name__)
@@ -13,6 +14,7 @@ manager=Manager()
 empresas=ListaEmpresas()
 msg=ListaMsg()
 positivos=ListaPositivos()
+negativos=ListaNegativos()
 
 @app.route('/')
 def index():
@@ -43,6 +45,7 @@ def alamacenar_datos_xml():
                     for sentimientonegativo in tipo_diccionario:
                         palabra_negativa=sentimientonegativo.text
                         manager.add_negativos(palabra_negativa)
+                        negativos.inserta_al_final_positivos(palabra_negativa)
                         contadorcuatro+=1
                 if tipo_diccionario.tag =='empresas_analizar':
                     contadorcinco=0
@@ -89,37 +92,48 @@ def alamacenar_datos_xml():
     cantidad_empresa=len(re.findall(name_empresa,mensaje_analizar, flags=re.IGNORECASE))
     print(cantidad_empresa)
     if cantidad_empresa>0:
-        contadorempresa=1
         print('Se analizará el mensaje', idmensaje,'porque se si se menciona a la empresa')
-        print(manager.get_sentimientos_positivos())
+#buscar servicio en el mensaje
+
+        #print(manager.get_sentimientos_positivos())
         tam_lista_positivos=manager.tamaño_lista_positivos()
-        print(tam_lista_positivos)
+        print('Total de palabras positivas a buscar=',tam_lista_positivos)
+        conteopositivos=0
         idpositivo=0
         while idpositivo< tam_lista_positivos:
             positivo=positivos.retornar_nodo(idpositivo)
-            print('palabra positivia a buscar=',positivo)
+            print('palabra positiva a buscar=',positivo)
             serch_positivos_msg= len(re.findall(positivo,mensaje_analizar, flags=re.IGNORECASE))
             print('cantidad de veces encontradas=',serch_positivos_msg)
             idpositivo+=1
+            conteopositivos+=serch_positivos_msg
+        totalpositivos=conteopositivos
+        print('TOTAL DE POSITIVOS EN EN MENSAJE=',totalpositivos)
+
+          
+
+
+        tam_lista_negativos=manager.tamaño_lista_negativos()
+        print('Total de palabra negativas a buscar=',tam_lista_negativos)
+        idnegativo=0
+        while idnegativo<tam_lista_negativos:
+            negativo=negativos.retornar_nodo(idnegativo)
+            print('palabra negativa a buscar=',negativo)
+            serch_negativo_msg= len(re.findall(negativo,mensaje_analizar, flags=re.IGNORECASE))
+            print('cantidad de veces encontradas=',serch_negativo_msg)
+            idnegativo+=1
         
-
-
-
-
-
+        
     else: 
         print('No se analiza el msg',idmensaje,'porque no existe mencion')
 
 
 
     # serch_fecha= r''
-
     # quitar=",;:.\n!¡\"'"
     # for caracter in quitar:
     #     mensaje_analizar=mensaje_analizar.replace(caracter,"")
 
-
-  
     # print(manager.get_sentimientos_positivos())
     # print(manager.get_sentimientos_negativos())
     # print(manager.get_mensajes())

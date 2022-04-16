@@ -57,6 +57,11 @@ class Manager():
         size_lista_positivos= len(self.lista_positivos)
         return size_lista_positivos
         #print(size_lista_mensajes)
+
+    def tamaño_lista_negativos(self):
+        size_lista_negativos= len(self.lista_negativos)
+        return size_lista_negativos
+        #print(size_lista_mensajes)
     
     def retornar_mensaje(self, id):
         mensaje=self.lista_mensajes[id]
