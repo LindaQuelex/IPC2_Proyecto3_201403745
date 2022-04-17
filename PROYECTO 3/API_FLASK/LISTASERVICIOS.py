@@ -54,6 +54,12 @@ class ListaServicios():
         nombreservicio=aux.servicio
         return nombreservicio
 
+    def tamaño_lista_servicios(self):
+        aux=self.ultimo
+        idultimo=aux.idservicio
+        #print(idultimo)
+        return idultimo
+      
 
 
 
@@ -70,4 +76,6 @@ class ListaServicios():
 # nodo.mostrar_servicios()
 
 # nodo.retornar_nodo_servicio(1)
+
+# nodo.tamaño_lista_servicios()
 

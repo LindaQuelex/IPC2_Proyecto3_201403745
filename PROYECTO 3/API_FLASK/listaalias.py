@@ -42,6 +42,13 @@ class ListaAlias():
         #print(aux.idalias, aux.alias)
         return aux
 
+    def retornarNombreAlias(self,id):
+        aux = self.primero
+        while aux.getidalias()<id:
+            aux=aux.getsiguiente()
+        nombrealias=aux.alias
+        return nombrealias
+
 
 
 # nodo=ListaAlias()
