@@ -9,7 +9,7 @@ class ListaAlias():
 
     def inserta_al_final_alias(self, alias):
         nuevoalias=NodoAlias(alias)
-        #nuevoalias.setidalias(self.size)
+        nuevoalias.setidalias(self.size)
         self.size += 1 
         if self.primero is None:
             self.primero=nuevoalias
@@ -50,6 +50,13 @@ class ListaAlias():
         return nombrealias
 
 
+    def tamaño_lista_alias(self):
+        aux=self.ultimo
+        idultimoalias=aux.idalias
+        print(idultimoalias)
+        return idultimoalias
+      
+
 
 # nodo=ListaAlias()
 
@@ -64,5 +71,7 @@ class ListaAlias():
 # nodo.mostrar_alias()
 
 # nodo.retornar_nodo(2)
+
+# nodo.tamaño_lista_alias()
 
 

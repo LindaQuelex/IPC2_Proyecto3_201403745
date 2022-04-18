@@ -75,7 +75,7 @@ def alamacenar_datos_xml():
                 contadorocho+=1
         contador+=1
 
-    #empresas.mostrar_empresas()   #prueba de datos cargados en TDA´s
+    empresas.mostrar_empresas()   #prueba de datos cargados en TDA´s
     #ENCONTRAR NOMBRE DE EMPRESA
     idempresa=0
     name_empresa=empresas.retornarNombreEmpresa(idempresa)
@@ -102,12 +102,15 @@ def alamacenar_datos_xml():
             serch_servicio=re.findall(name_servicio,mensaje_analizar, flags=re.IGNORECASE)
             repeticiones_servicio=len(re.findall(name_servicio,mensaje_analizar, flags=re.IGNORECASE))
             print('cantidad de repeticiones del servicio en el mensaje:', repeticiones_servicio)
+            tam_lista_alias=empresas.retornarNodoEmpresa(idempresa).Lista_servicios.retornar_nodo_servicio(idservicio).lista_alias.tamaño_lista_alias()
+            print('este es el tamaño de la lista alias:=',tam_lista_alias)
     #id alias que aumente con while
             idalias=0
             name_alias=empresas.retornarNodoEmpresa(idempresa).Lista_servicios.retornar_nodo_servicio(idservicio).lista_alias.retornarNombreAlias(idalias)
             print('el nombre del alias a buscar es=', name_alias)
             repeticiones_alias=len(re.findall(name_alias,mensaje_analizar, flags=re.IGNORECASE))
             print('cantidad de repeticiones del alias en el mensaje es:', repeticiones_alias)
+
             if repeticiones_servicio>0:
                 #print(manager.get_sentimientos_positivos())
                 tam_lista_positivos=manager.tamaño_lista_positivos()
@@ -142,10 +145,13 @@ def alamacenar_datos_xml():
                     print('Clasificación: MENSAJE NEGATIVO :(')
                 else:
                     print('Clasificación: MENSAJE NEUTRO')
+
             elif repeticiones_servicio==0:
                 print('no existe servicio en el mensaje, por lo tanto no se analiza')
 
             elif repeticiones_alias>0:
+                ############################
+                #while idalias<tam_lista_alias:
                 print('buscar alias en mensaje y contar')
                 tam_lista_positivos=manager.tamaño_lista_positivos()
                 print('Total de palabras positivas a buscar=',tam_lista_positivos)
@@ -176,6 +182,8 @@ def alamacenar_datos_xml():
                 contador_mensajes_positivos=0
                 contador_memsajes_negativos=0
                 contador_mensajes_neutros=0
+
+
                 if totalpositivos2>totalnegativos2:
                     print('Clasificación: MENSAJE POSITIVO :)')
                     contador_mensajes_positivos+=1
@@ -185,8 +193,10 @@ def alamacenar_datos_xml():
                 else:
                     print('Clasificación: MENSAJE NEUTRO')
                     contador_mensajes_neutros+=1
+                idalias+=1
             elif repeticiones_alias==0:
                 print('no exite alias en el mensaje, por lo tanton no se analiza')
+           
             idservicio+=1
     else: 
         print('No se analiza el msg',idmensaje,'porque no existe mencion')
