@@ -20,7 +20,7 @@ negativos=ListaNegativos()
 def index():
     return "API :)"
 
-@app.route('/almacenardatosxml', methods=['POST'])
+@app.route('/almacenardatosxml', methods=['GET'])
 def alamacenar_datos_xml():
     print('\n','****ENCABEZADOS****','\n')
     print(request.headers)
@@ -147,6 +147,7 @@ def alamacenar_datos_xml():
                     print('Clasificación: MENSAJE NEUTRO')
 
             elif repeticiones_servicio==0:
+                
                 print('no existe servicio en el mensaje, por lo tanto no se analiza')
 
             elif repeticiones_alias>0:
