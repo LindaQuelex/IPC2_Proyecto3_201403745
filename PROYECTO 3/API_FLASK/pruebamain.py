@@ -1,3 +1,4 @@
+import json
 from flask import Flask, request
 from manage import Manager
 from flask.json import jsonify
@@ -220,6 +221,13 @@ def alamacenar_datos_xml():
 def get_positivos():
     c =manager.get_sentimientos_positivos()
     return jsonify(c),200
+
+@app.route('/shownegativos', methods=['GET'])
+def get_negativos():
+    c2=manager.get_sentimientos_negativos()
+    return jsonify(c2),200
+
+
 
 
 if __name__=="__main__":
