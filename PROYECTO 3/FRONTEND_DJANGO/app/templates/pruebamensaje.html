@@ -1,9 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="jumbotron text-center">
+<div class="container py-2">
+    <h1 style="text-align: center;"> PRUEBA </h1>
+</div>
+<div class="container py-2">
+<form action="/cargar/" method="GET" enctype="multipart/form-data">
+    {% csrf_token %}
+<br>
 
+<div class="container py-3">
+    {% if content %}   
+        <textarea label="textarea" name="textarea" rows="10" cols="70">{{content}}</textarea>
+        <textarea label="textarea" name="textarea2" rows="10" cols="70">{{response}}</textarea>
+    {% else %}
+        <textarea style="margin-right: 1rem;" label="textarea" name="textarea" rows="10" cols="70"></textarea>
+        <textarea label="textarea" name="textarea2" rows="10" cols="70"></textarea>
+    {% endif %}
+</div>
+<button style="background-color: green"  type="submit" class="btn btn-dark btn-lg">Realizar Prueba</button>
+<button style="background-color: red" type="reset" class="btn btn-dark btn-lg">Reset</button>
 
-    
-  </section>
-  {% endblock content %}
-  
+</form>
+</div>
+{% endblock content %}

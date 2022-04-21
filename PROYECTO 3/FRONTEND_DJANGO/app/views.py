@@ -1,5 +1,7 @@
 from multiprocessing import context
 from django.shortcuts import render
+import requests
+from app.forms import FileForm
 
 
 # Create your views here.
@@ -12,19 +14,20 @@ def home(request):
     print('que hace esto')
     return render(request,'index.html')
 
-
 def add(request):
     pass
 
 def infoestudiante(request):
+
     return render(request,'datosestudiante.html')
 
 def docu(request):
-    pass
-
+    
+    return render(request, 'docu.html')
 
 def pruebamsg(request):
-    pass
+     
+     return render(request, "pruebamensaje.html")
 
 def reportePDF(request):
     pass
