@@ -1,3 +1,4 @@
+import unicodedata
 from listas_pos_neg_msg import sent_positivos, sent_negativos, mensajes
 
 class Manager():
@@ -67,6 +68,18 @@ class Manager():
         mensaje=self.lista_mensajes[id]
         return mensaje
   
+    def remove_non_ascii(string:str )-> str:
+        return string.encode('ascii','ignore').decode('utf-8').casefold()
+
+    def remove_non_ascii_normalize(string:str)->str:
+        normalized=unicodedata.normalize('NFD', string)
+        return normalized.encode('ascii', 'ignore').decode('utf-8').casefold()
+
         
-        
-        
+
+
+# string1='hola'
+# string2='holá'
+
+# print(Manager.remove_non_ascii(string2))
+# print(Manager.remove_non_ascii_normalize(string2))

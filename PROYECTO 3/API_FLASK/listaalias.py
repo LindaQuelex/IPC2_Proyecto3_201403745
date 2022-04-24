@@ -43,18 +43,31 @@ class ListaAlias():
         return aux
 
     def retornarNombreAlias(self,id):
+
         aux = self.primero
-        while aux.getidalias()<id:
-            aux=aux.getsiguiente()
-        nombrealias=aux.alias
-        return nombrealias
+        if aux!=None:
+            while aux.getidalias()<id:
+                aux=aux.getsiguiente()
+            nombrealias=aux.alias
+            return nombrealias
+        else: 
+            print('No existen alias para el servicio')
+            aux=-1
+            return aux
+
+
 
 
     def tamaño_lista_alias(self):
         aux=self.ultimo
-        idultimoalias=aux.idalias
-        print(idultimoalias)
-        return idultimoalias
+        if aux!=None:
+            idultimoalias=aux.idalias
+            print(idultimoalias)
+            return idultimoalias
+        else:
+            aux=-1
+            print('no existen alias para el servicio')
+            return aux
       
 
 
@@ -70,8 +83,10 @@ class ListaAlias():
 
 # nodo.mostrar_alias()
 
-# nodo.retornar_nodo(2)
+# # nodo.retornar_nodo(2)
 
 # nodo.tamaño_lista_alias()
+# nodo.retornarNombreAlias(2)
+
 
 

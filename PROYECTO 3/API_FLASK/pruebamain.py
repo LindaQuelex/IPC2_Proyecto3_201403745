@@ -97,21 +97,12 @@ def alamacenar_datos_xml():
         tam_lista_servicios=empresas.retornarNodoEmpresa(idempresa).Lista_servicios.tamaño_lista_servicios()
         print('El tamaño de la lista servicios es: ', tam_lista_servicios)
         idservicio=0
-        while idservicio<tam_lista_servicios:
+        while idservicio<=tam_lista_servicios:
             name_servicio=empresas.retornarNodoEmpresa(idempresa).Lista_servicios.retornarNombreServicio(idservicio)
             print('El servicio a buscar es=', name_servicio)
             serch_servicio=re.findall(name_servicio,mensaje_analizar, flags=re.IGNORECASE)
             repeticiones_servicio=len(re.findall(name_servicio,mensaje_analizar, flags=re.IGNORECASE))
             print('cantidad de repeticiones del servicio en el mensaje:', repeticiones_servicio)
-            tam_lista_alias=empresas.retornarNodoEmpresa(idempresa).Lista_servicios.retornar_nodo_servicio(idservicio).lista_alias.tamaño_lista_alias()
-            print('este es el tamaño de la lista alias:=',tam_lista_alias)
-    #id alias que aumente con while
-            idalias=0
-            name_alias=empresas.retornarNodoEmpresa(idempresa).Lista_servicios.retornar_nodo_servicio(idservicio).lista_alias.retornarNombreAlias(idalias)
-            print('el nombre del alias a buscar es=', name_alias)
-            repeticiones_alias=len(re.findall(name_alias,mensaje_analizar, flags=re.IGNORECASE))
-            print('cantidad de repeticiones del alias en el mensaje es:', repeticiones_alias)
-
             if repeticiones_servicio>0:
                 #print(manager.get_sentimientos_positivos())
                 tam_lista_positivos=manager.tamaño_lista_positivos()
@@ -145,60 +136,60 @@ def alamacenar_datos_xml():
                 elif totalpositivos< totalnegativos:
                     print('Clasificación: MENSAJE NEGATIVO :(')
                 else:
-                    print('Clasificación: MENSAJE NEUTRO')
-
+                    print('Clasificación: MENSAJE NEUTRO')           
             elif repeticiones_servicio==0:
-                
-                print('no existe servicio en el mensaje, por lo tanto no se analiza')
-
-            elif repeticiones_alias>0:
-                ############################
-                #while idalias<tam_lista_alias:
-                print('buscar alias en mensaje y contar')
-                tam_lista_positivos=manager.tamaño_lista_positivos()
-                print('Total de palabras positivas a buscar=',tam_lista_positivos)
-                conteopositivos=0
-                idpositivo=0
-                while idpositivo< tam_lista_positivos:
-                    positivo=positivos.retornar_nodo(idpositivo)
-                    print('palabra positiva a buscar=',positivo)
-                    serch_positivos_msg= len(re.findall(positivo,mensaje_analizar, flags=re.IGNORECASE))
-                    print('cantidad de veces encontradas=',serch_positivos_msg)
-                    idpositivo+=1
-                    conteopositivos+=serch_positivos_msg
-                totalpositivos2=conteopositivos
-                print('TOTAL DE POSITIVOS EN EN MENSAJE=',totalpositivos2)
-                tam_lista_negativos=manager.tamaño_lista_negativos()
-                print('Total de palabra negativas a buscar=',tam_lista_negativos)
-                conteonegativos=0
-                idnegativo=0
-                while idnegativo<tam_lista_negativos:
-                    negativo=negativos.retornar_nodo(idnegativo)
-                    print('palabra negativa a buscar=',negativo)
-                    serch_negativo_msg= len(re.findall(negativo,mensaje_analizar, flags=re.IGNORECASE))
-                    print('cantidad de veces encontradas=',serch_negativo_msg)
-                    idnegativo+=1
-                    conteonegativos+=serch_negativo_msg
-                totalnegativos2=conteonegativos
-                print('TOTAL DE NEGATIVOS EN EL MENSAJE=',totalnegativos2)
-                contador_mensajes_positivos=0
-                contador_memsajes_negativos=0
-                contador_mensajes_neutros=0
-
-
-                if totalpositivos2>totalnegativos2:
-                    print('Clasificación: MENSAJE POSITIVO :)')
-                    contador_mensajes_positivos+=1
-                elif totalpositivos2< totalnegativos2:
-                    print('Clasificación: MENSAJE NEGATIVO :(')
-                    contador_memsajes_negativos+=1
-                else:
-                    print('Clasificación: MENSAJE NEUTRO')
-                    contador_mensajes_neutros+=1
-                idalias+=1
-            elif repeticiones_alias==0:
-                print('no exite alias en el mensaje, por lo tanton no se analiza')
-           
+                print('no existe servicio en el mensaje, por lo tanto se analizará por alias')
+                tam_lista_alias=empresas.retornarNodoEmpresa(idempresa).Lista_servicios.retornar_nodo_servicio(idservicio).lista_alias.tamaño_lista_alias()
+                print('este es el tamaño de la lista alias:=',tam_lista_alias)
+                idalias=0
+                while idalias<=tam_lista_alias:
+                    name_alias=empresas.retornarNodoEmpresa(idempresa).Lista_servicios.retornar_nodo_servicio(idservicio).lista_alias.retornarNombreAlias(idalias)
+                    print('el nombre del alias a buscar es=', name_alias)
+                    repeticiones_alias=len(re.findall(name_alias,mensaje_analizar, flags=re.IGNORECASE))
+                    print('cantidad de repeticiones del alias en el mensaje es:', repeticiones_alias)
+                    if repeticiones_alias>0:
+                        print('buscar alias en mensaje y contar')
+                        tam_lista_positivos=manager.tamaño_lista_positivos()
+                        print('Total de palabras positivas a buscar=',tam_lista_positivos)
+                        conteopositivos=0
+                        idpositivo=0
+                        while idpositivo< tam_lista_positivos:
+                            positivo=positivos.retornar_nodo(idpositivo)
+                            print('palabra positiva a buscar=',positivo)
+                            serch_positivos_msg= len(re.findall(positivo,mensaje_analizar, flags=re.IGNORECASE))
+                            print('cantidad de veces encontradas=',serch_positivos_msg)
+                            idpositivo+=1
+                            conteopositivos+=serch_positivos_msg
+                        totalpositivos2=conteopositivos
+                        print('TOTAL DE POSITIVOS EN EN MENSAJE=',totalpositivos2)
+                        tam_lista_negativos=manager.tamaño_lista_negativos()
+                        print('Total de palabra negativas a buscar=',tam_lista_negativos)
+                        conteonegativos=0
+                        idnegativo=0
+                        while idnegativo<tam_lista_negativos:
+                            negativo=negativos.retornar_nodo(idnegativo)
+                            print('palabra negativa a buscar=',negativo)
+                            serch_negativo_msg= len(re.findall(negativo,mensaje_analizar, flags=re.IGNORECASE))
+                            print('cantidad de veces encontradas=',serch_negativo_msg)
+                            idnegativo+=1
+                            conteonegativos+=serch_negativo_msg
+                        totalnegativos2=conteonegativos
+                        print('TOTAL DE NEGATIVOS EN EL MENSAJE=',totalnegativos2)
+                        contador_mensajes_positivos=0
+                        contador_memsajes_negativos=0
+                        contador_mensajes_neutros=0
+                        if totalpositivos2>totalnegativos2:
+                            print('Clasificación: MENSAJE POSITIVO :)')
+                            contador_mensajes_positivos+=1
+                        elif totalpositivos2< totalnegativos2:
+                            print('Clasificación: MENSAJE NEGATIVO :(')
+                            contador_memsajes_negativos+=1
+                        else:
+                            print('Clasificación: MENSAJE NEUTRO')
+                            contador_mensajes_neutros+=1
+                    if repeticiones_alias==0:
+                        print('no exite alias en el mensaje, por lo tanto no se analiza')
+                    idalias+=1
             idservicio+=1
     else: 
         print('No se analiza el msg',idmensaje,'porque no existe mencion')
@@ -216,6 +207,11 @@ def alamacenar_datos_xml():
 
             
     return jsonify ({'msg':'prueba de funcionamiento de del método "almacenar_datos_xml" de la API'}),200
+
+
+
+
+
 
 @app.route('/showpositivos', methods=['GET'])
 def get_positivos():
