@@ -40,5 +40,9 @@ class ListaEmpresas():
         return nombreempresa
 
 
-
+    def tamaño_lista_empresas(self):
+        aux=self.ultimo
+        idultimo=aux.idempresa
+        #print(idultimo)
+        return idultimo
 

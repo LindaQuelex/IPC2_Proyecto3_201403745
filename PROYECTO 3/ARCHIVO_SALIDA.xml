@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<lista_respuestas>
+	<respuesta>
+		<fecha>fechas</fecha>
+		<mensajes>
+			<total>número total</total>
+			<positivos>número positivos</positivos>
+			<negativos>número negativos</negativos>
+			<neutros>número neutros</neutros>
+		</mensajes>
+		<analisis>
+			<empresa atributo="nombre de la empresa">
+				<mensajes>
+					<total>número total</total>
+					<positivos>número positivos</positivos>
+					<negativos>número negativos</negativos>
+					<neutros>número neutros</neutros>
+				</mensajes>
+				<servicios>
+					<servicio name="nombre del servicio">
+						<mensajes>
+							<total>número total</total>
+							<positivos>número positivos</positivos>
+							<negativos>número negativos</negativos>
+							<neutros>número neutros</neutros>
+						</mensajes>
+					</servicio>
+				</servicios>
+			</empresa>
+		</analisis>
+	</respuesta>
+</lista_respuestas>
