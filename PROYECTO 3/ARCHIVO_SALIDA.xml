@@ -3,26 +3,26 @@
 	<respuesta>
 		<fecha>fechas</fecha>
 		<mensajes>
-			<total>número total</total>
-			<positivos>número positivos</positivos>
-			<negativos>número negativos</negativos>
-			<neutros>número neutros</neutros>
+			<total>3</total>
+			<positivos/>
+			<negativos/>
+			<neutros/>
 		</mensajes>
 		<analisis>
-			<empresa atributo="nombre de la empresa">
+			<empresa empresa=" IGSS ">
 				<mensajes>
-					<total>número total</total>
-					<positivos>número positivos</positivos>
-					<negativos>número negativos</negativos>
-					<neutros>número neutros</neutros>
+					<total/>
+					<positivos/>
+					<negativos/>
+					<neutros/>
 				</mensajes>
 				<servicios>
-					<servicio name="nombre del servicio">
+					<servicio servicio="parqueos">
 						<mensajes>
-							<total>número total</total>
-							<positivos>número positivos</positivos>
-							<negativos>número negativos</negativos>
-							<neutros>número neutros</neutros>
+							<total>0</total>
+							<positivos>0</positivos>
+							<negativos>0</negativos>
+							<neutros>0</neutros>
 						</mensajes>
 					</servicio>
 				</servicios>

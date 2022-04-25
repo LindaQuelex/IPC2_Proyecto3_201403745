@@ -11,7 +11,9 @@ from LISTANEGATIVOS import ListaNegativos
 from xml.dom import minidom
 from xml.dom.minidom import parse, parseString
 import xml.dom.minidom
+import xml.dom.minidom
 import re
+import xml 
 
 app=Flask(__name__)
 
@@ -81,23 +83,119 @@ def alamacenar_datos_xml():
         contador+=1
 
     empresas.mostrar_empresas()   #prueba de datos cargados en TDA´s
+    #INICIA LA ESTRUCTURA DEL ARCHIVO XML DE SALIDA
+   
+    root = ET.Element("lista_respuestas")
+    respuesta = ET.SubElement(root, "respuesta")
+    fecha = ET.SubElement(respuesta, "fecha") 
+    mensajesmsg=ET.SubElement(respuesta, "mensajes")
+    totalmensajes=ET.SubElement(mensajesmsg, "total")
+    positivosmensajes=ET.SubElement(mensajesmsg, "positivos")
+    #positivosmensajes.text="número positivos"
+    negativosmensajes=ET.SubElement(mensajesmsg, "negativos")
+    #negativosmensajes.text="número negativos"
+    neutrosmensajes=ET.SubElement(mensajesmsg, "neutros")
+    #neutrosmensajes.text="número neutros"
+    analisis=ET.SubElement(respuesta, "analisis")
+    empresa_nombre=ET.SubElement(analisis, "empresa")
+    mensajesempresa=ET.SubElement(empresa_nombre, "mensajes")
+    totalmsgempresa=ET.SubElement(mensajesempresa, "total")
+    #totalmsgempresa.text="número total"
+    positivosmsgempresa=ET.SubElement(mensajesempresa, "positivos")
+    #positivosmsgempresa.text="número positivos"
+    negativosmsgempresa=ET.SubElement(mensajesempresa, "negativos")
+    #negativosmsgempresa.text="número negativos"
+    neutrosmsgempresa=ET.SubElement(mensajesempresa, "neutros")
+    #neutrosmsgempresa.text="número neutros"
+    servicios=ET.SubElement(empresa_nombre, "servicios")
+    servicio=ET.SubElement(servicios, "servicio")
+    mensajesservicio=ET.SubElement(servicio, "mensajes")
+    totalmsgservicio=ET.SubElement(mensajesservicio, "total")
+    #totalmsgservicio.text="número total"                 
+    positivosmsgservicio=ET.SubElement(mensajesservicio, "positivos")
+    negativosmsgservicio=ET.SubElement(mensajesservicio, "negativos")
+    neutrosmsgservicio=ET.SubElement(mensajesservicio, "neutros")
+
     #INICIA EL ANÁLISIS DE LOS DATOS XML
     tam_list_mensajes=manager.tamaño_lista_mensajes()
+    totalmensajes.text=str(tam_list_mensajes)
+    print('TAMAÑO DE LISTA DE MENSAJES', tam_list_mensajes)
     idmensaje=0
-    while idmensaje<tam_list_mensajes:
+    while idmensaje<tam_list_mensajes: 
         mensaje_analizar=msg.retornar_nodo(idmensaje)
-        print(mensaje_analizar)
+        print('MENSAJE ORIGINAL:   ',mensaje_analizar)
+        quitar=";;:,.\n!\"'"
+        for caracter in quitar:
+            mensaje_analizar=mensaje_analizar.replace(caracter,"")
+        mensaje_analizar=mensaje_analizar.replace("á","a")
+        mensaje_analizar=mensaje_analizar.replace("é","e")
+        mensaje_analizar=mensaje_analizar.replace("í","i")
+        mensaje_analizar=mensaje_analizar.replace("ó","o")
+        mensaje_analizar=mensaje_analizar.replace("ú","u")
+        mensaje_analizar=mensaje_analizar.replace("Á","A")
+        mensaje_analizar=mensaje_analizar.replace("É","E")
+        mensaje_analizar=mensaje_analizar.replace("Í","I")
+        mensaje_analizar=mensaje_analizar.replace("Ó","O")
+        mensaje_analizar=mensaje_analizar.replace("Ú","U")
+        print('MENSAJES SIN SIGNOS NI TILDES:    ',mensaje_analizar)
         tam_lista_empresas=empresas.tamaño_lista_empresas()
         print('El tamaño de la lista empresas es: ', tam_lista_empresas)
+        fecha.text= "fechas"
         idempresa=0
         while idempresa<=tam_lista_empresas:
             name_empresa=empresas.retornarNombreEmpresa(idempresa)
+            empresa_nombre.attrib={'empresa' : name_empresa}
+                # new_rank = int(rank.text) + 1
+                # rank.text = str(new_rank)
+                # rank.set('updated', 'yes')
+            quitar=";;:,.\n!\"'"
+            for caracter in quitar:
+                name_empresa=name_empresa.replace(caracter,"")
+            name_empresa=name_empresa.replace("á","a")
+            name_empresa=name_empresa.replace("é","e")
+            name_empresa=name_empresa.replace("í","i")
+            name_empresa=name_empresa.replace("ó","o")
+            name_empresa=name_empresa.replace("ú","u")
+            name_empresa=name_empresa.replace("Á","A")
+            name_empresa=name_empresa.replace("É","E")
+            name_empresa=name_empresa.replace("Í","I")
+            name_empresa=name_empresa.replace("Ó","O")
+            name_empresa=name_empresa.replace("Ú","U")
             print('EL NOMBRE DE LA EMPRESA ES:   ',name_empresa)
-        # name=name_empresa.lower()
-        # print(name)
-        # manager.retornar_mensaje(1)
+            # name=name_empresa.lower()
+            # print(name)
+            # manager.retornar_mensaje(1)
             serch_empresa= re.findall(name_empresa,mensaje_analizar, flags=re.IGNORECASE)
             print('La empresa a analizar es:', serch_empresa)
+
+
+
+
+
+
+
+
+
+
+
+            x=0
+            if serch_empresa!=None:
+                x+=1
+                print('pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+            else:
+                print('xxxxxxxx')
+
+
+
+
+
+
+
+
+
+
+                
+        
             cantidad_empresa=len(re.findall(name_empresa,mensaje_analizar, flags=re.IGNORECASE))
             print('cantidad de repeticiones de la empresa en el mensaje=',cantidad_empresa)
             if cantidad_empresa>0:
@@ -107,6 +205,20 @@ def alamacenar_datos_xml():
                 idservicio=0
                 while idservicio<=tam_lista_servicios:
                     name_servicio=empresas.retornarNodoEmpresa(idempresa).Lista_servicios.retornarNombreServicio(idservicio)
+                    servicio.attrib={'servicio':name_servicio}
+                    quitar=";;:,.\n!\"'"
+                    for caracter in quitar:
+                        name_servicio=name_servicio.replace(caracter,"")
+                    name_servicio=name_servicio.replace("á","a")
+                    name_servicio=name_servicio.replace("é","e")
+                    name_servicio=name_servicio.replace("í","i")
+                    name_servicio=name_servicio.replace("ó","o")
+                    name_servicio=name_servicio.replace("ú","u")
+                    name_servicio=name_servicio.replace("Á","A")
+                    name_servicio=name_servicio.replace("É","E")
+                    name_servicio=name_servicio.replace("Í","I")
+                    name_servicio=name_servicio.replace("Ó","O")
+                    name_servicio=name_servicio.replace("Ú","U")
                     print('El servicio a buscar es=', name_servicio)
                     serch_servicio=re.findall(name_servicio,mensaje_analizar, flags=re.IGNORECASE)
                     repeticiones_servicio=len(re.findall(name_servicio,mensaje_analizar, flags=re.IGNORECASE))
@@ -139,12 +251,21 @@ def alamacenar_datos_xml():
                             conteonegativos+=serch_negativo_msg
                         totalnegativos=conteonegativos
                         print('TOTAL DE NEGATIVOS EN EL MENSAJE=',totalnegativos)
+                        contador_mensajes_positivos=0
+                        contador_memsajes_negativos=0
+                        contador_mensajes_neutros=0
                         if totalpositivos>totalnegativos:
                             print('Clasificación: MENSAJE POSITIVO :)')
+                            contador_mensajes_positivos+=1
+                            positivosmsgservicio.text=str(contador_mensajes_positivos)
                         elif totalpositivos< totalnegativos:
                             print('Clasificación: MENSAJE NEGATIVO :(')
+                            contador_memsajes_negativos+=1
+                            negativosmsgservicio.text=str(contador_memsajes_negativos)
                         else:
-                            print('Clasificación: MENSAJE NEUTRO')           
+                            print('Clasificación: MENSAJE NEUTRO')  
+                            contador_mensajes_neutros+=1
+                            neutrosmsgservicio.text=str(contador_mensajes_neutros)
                     elif repeticiones_servicio==0:
                         print('no existe servicio en el mensaje, por lo tanto se analizará por alias')
                         tam_lista_alias=empresas.retornarNodoEmpresa(idempresa).Lista_servicios.retornar_nodo_servicio(idservicio).lista_alias.tamaño_lista_alias()
@@ -152,6 +273,19 @@ def alamacenar_datos_xml():
                         idalias=0
                         while idalias<=tam_lista_alias:
                             name_alias=empresas.retornarNodoEmpresa(idempresa).Lista_servicios.retornar_nodo_servicio(idservicio).lista_alias.retornarNombreAlias(idalias)
+                            quitar=";;:,.\n!\"'"
+                            for caracter in quitar:
+                                name_alias=name_alias.replace(caracter,"")
+                            name_alias=name_alias.replace("á","a")
+                            name_alias=name_alias.replace("é","e")
+                            name_alias=name_alias.replace("í","i")
+                            name_alias=name_alias.replace("ó","o")
+                            name_alias=name_alias.replace("ú","u")
+                            name_alias=name_alias.replace("Á","A")
+                            name_alias=name_alias.replace("É","E")
+                            name_alias=name_alias.replace("Í","I")
+                            name_alias=name_alias.replace("Ó","O")
+                            name_alias=name_alias.replace("Ú","U")
                             print('el nombre del alias a buscar es=', name_alias)
                             repeticiones_alias=len(re.findall(name_alias,mensaje_analizar, flags=re.IGNORECASE))
                             print('cantidad de repeticiones del alias en el mensaje es:', repeticiones_alias)
@@ -189,15 +323,23 @@ def alamacenar_datos_xml():
                                 if totalpositivos2>totalnegativos2:
                                     print('Clasificación: MENSAJE POSITIVO :)')
                                     contador_mensajes_positivos+=1
+                                    positivosmsgservicio.text=str(contador_mensajes_positivos)
                                 elif totalpositivos2< totalnegativos2:
                                     print('Clasificación: MENSAJE NEGATIVO :(')
                                     contador_memsajes_negativos+=1
+                                    negativosmsgservicio.text=str(contador_memsajes_negativos)
                                 else:
                                     print('Clasificación: MENSAJE NEUTRO')
                                     contador_mensajes_neutros+=1
+                                    neutrosmsgservicio.text=str(contador_mensajes_neutros)
                             if repeticiones_alias==0:
                                 print('no exite alias en el mensaje, por lo tanto no se analiza')
+                                totalmsgservicio.text="0"
+                                positivosmsgservicio.text="0"
+                                negativosmsgservicio.text="0"
+                                neutrosmsgservicio.text="0"
                             idalias+=1
+                    
                     idservicio+=1
             idempresa+=1
         else: 
@@ -209,9 +351,19 @@ def alamacenar_datos_xml():
     # for caracter in quitar:
     #     mensaje_analizar=mensaje_analizar.replace(caracter,"")
 
+
     # print(manager.get_sentimientos_positivos())
     # print(manager.get_sentimientos_negativos())
     # print(manager.get_mensajes())
+
+    xml_str = ET.tostring(root, encoding='utf-8', method='xml').decode('utf-8')
+    xmlparse= minidom.parseString(xml_str)
+    prettyxml = xmlparse.toprettyxml()
+    print(prettyxml)
+     
+    archivosalida=open('ARCHIVO_SALIDA.xml','w',encoding='utf-8')
+    archivosalida.write(prettyxml)
+    archivosalida.close()
   
     return jsonify ({'msg':'prueba de funcionamiento de del método "almacenar_datos_xml" de la API'}),200
 
