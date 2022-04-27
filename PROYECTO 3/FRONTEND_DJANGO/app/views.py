@@ -51,10 +51,15 @@ def cargaMasiva(request):
             f = request.FILES['file']
             print(request.FILES)
             xml_binary=f.read()#.decode('UTF-8')
-            
+       
+
             print(xml_binary)
+            xml=xml_binary.decode('UTF-8')
+            ctx['content']=xml
             response = requests.post(endpoint+'almacenardatosxml', data=xml_binary)
  
             if response.ok:
-                ctx['response']= 'Archivo xml cargado correctamente'
+                ctx['response']= 'Archivo xml cargado correctamente :D'
+    else: 
+        return render(request, 'carga.html')
     return render(request,'carga.html',ctx)
