@@ -1,4 +1,6 @@
 from multiprocessing import context
+from urllib import response
+from urllib.request import Request
 from django.shortcuts import render
 import requests
 from app.forms import FileForm
@@ -9,7 +11,7 @@ import requests
 
 endpoint='http://localhost:4000/'
 def home(request):
-    respon=requests.get(endpoint+'almacenardatosxml')
+    respon=requests.post(endpoint+'almacenardatosxml')
     # a=1
     print('que hace esto')
     return render(request,'index.html')
@@ -40,4 +42,19 @@ def cargaMasiva(request):
         'content': None,
         'response': None,
     }
+    # if Request.method== 'GET':
+    #     form =FileForm()
+
+    if request.method=='POST':
+        form=FileForm(request.POST, request.FILES)
+        if form.is_valid():
+            f = request.FILES['file']
+            print(request.FILES)
+            xml_binary=f.read()#.decode('UTF-8')
+            
+            print(xml_binary)
+            response = requests.post(endpoint+'almacenardatosxml', data=xml_binary)
+ 
+            if response.ok:
+                ctx['response']= 'Archivo xml cargado correctamente'
     return render(request,'carga.html',ctx)

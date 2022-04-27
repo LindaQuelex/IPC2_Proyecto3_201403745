@@ -27,7 +27,7 @@ negativos=ListaNegativos()
 def index():
     return "API :)"
 
-@app.route('/almacenardatosxml', methods=['GET'])
+@app.route('/almacenardatosxml', methods=['POST'])
 def alamacenar_datos_xml():
     print('\n','****ENCABEZADOS****','\n')
     print(request.headers)
@@ -169,28 +169,14 @@ def alamacenar_datos_xml():
             print('La empresa a analizar es:', serch_empresa)
 
 
-
-
-
-
-
-
-
-
-
             x=0
-            if serch_empresa!=None:
-                x+=1
-                print('pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+            if serch_empresa!=[]:
+
+               x=+1
+               
             else:
-                print('xxxxxxxx')
-
-
-
-
-
-
-
+                print('xxxxxxxx',x)
+            print('holaaaaa',x)
 
 
 
@@ -365,7 +351,7 @@ def alamacenar_datos_xml():
     archivosalida.write(prettyxml)
     archivosalida.close()
   
-    return jsonify ({'msg':'prueba de funcionamiento de del método "almacenar_datos_xml" de la API'}),200
+    return jsonify ({'ok':True,'msg':'prueba de funcionamiento de del método "almacenar_datos_xml" de la API'}),200
 
 @app.route('/showpositivos', methods=['GET'])
 def get_positivos():
