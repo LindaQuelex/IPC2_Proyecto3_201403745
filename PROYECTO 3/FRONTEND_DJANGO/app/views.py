@@ -4,6 +4,7 @@ from urllib.request import Request
 from django.shortcuts import render
 import requests
 from app.forms import FileForm
+from xml.etree import ElementTree as ET
 
 
 # Create your views here.
@@ -59,7 +60,14 @@ def cargaMasiva(request):
             response = requests.post(endpoint+'almacenardatosxml', data=xml_binary)
  
             if response.ok:
-                ctx['response']= 'Archivo xml cargado correctamente :D'
+                # archivosalida=open('ARCHIVO_SALIDA.xml','w',encoding='utf-8')
+                # archivosalida.close()
+                filename='C:/Users/Linda Quelex/Desktop/UNIVERSIDAD 2022/LAB IPC2/PROYECTO 3/IPC2_Proyecto3_201403745/PROYECTO 3/ARCHIVO_SALIDA.xml'
+                salida =open(filename, encoding='utf-8')
+                salida2=salida.read()
+                print (salida2)
+                ctx['response']= salida2
+                
     else: 
         return render(request, 'carga.html')
     return render(request,'carga.html',ctx)
