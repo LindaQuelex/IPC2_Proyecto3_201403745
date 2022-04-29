@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container py-2">
-    <h1 style="text-align: center;"> Carga Masiva </h1>
+    <h1 style="text-align: center;"> Carga de Archivos </h1>
 </div>
 <div class="container py-2">
 <form action="/carga.html/" method="POST" enctype="multipart/form-data">
@@ -18,7 +18,7 @@
         <textarea label="textarea" name="textarea2" rows="13" cols="70"></textarea>
     {% endif %}
 </div>
-<button style="background-color: green"  type="submit" class="btn btn-dark btn-lg">Analizar</button>
+<button style="background-color: green"  type="submit" class="btn btn-dark btn-lg">Enviar</button>
 <button style="background-color: red" type="reset" class="btn btn-dark btn-lg">Reset</button>
 <button style="background-color: black" type="button" class="btn btn-dark btn-lg">Generar PDF</button>
 </form>

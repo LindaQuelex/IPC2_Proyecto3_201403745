@@ -11,5 +11,6 @@ urlpatterns={
     path('pruebamensaje.html/',views.pruebamsg, name='pruebamsg'),
     path('reportePDF.html/',views.reportePDF, name='reportePDF'),
     path('resumenporfecha.html/',views.resumenporfecha, name='resumenporfecha'),
+    path('consulta.html/', views.consulta, name='consulta'),
 
 }

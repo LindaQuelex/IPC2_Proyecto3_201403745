@@ -38,6 +38,23 @@ def reportePDF(request):
 def resumenporfecha(request):
     pass
 
+def consulta(request):
+    ctx= {
+        'response': None,
+    }
+
+    if request.method=='GET':
+        try:
+            filename='C:/Users/Linda Quelex/Desktop/UNIVERSIDAD 2022/LAB IPC2/PROYECTO 3/IPC2_Proyecto3_201403745/PROYECTO 3/ARCHIVO_SALIDA.xml'
+            salida =open(filename, encoding='utf-8')
+            salida2=salida.read()
+            print (salida2)
+            ctx['response']= salida2
+        except:
+            ctx['response']='NO HAY BASE DE DATOS'
+    return render(request, "consulta.html", ctx)
+
+
 def cargaMasiva(request):
     ctx= {
         'content': None,
