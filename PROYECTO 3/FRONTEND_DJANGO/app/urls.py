@@ -2,15 +2,18 @@
 from django.urls import path, include
 from . import views
 
-urlpatterns={
+urlpatterns=[
     path('',views.home, name='index'),
     path('add.html/',views.add, name='add'),
-    path('carga.html/',views.cargaMasiva, name='carga'),
-    path('datosestudiante.html/',views.infoestudiante, name='datosestudiante'),
-    path('docu.html/',views.docu, name='docu'),
-    path('pruebamensaje.html/',views.pruebamsg, name='pruebamsg'),
-    path('reportePDF.html/',views.reportePDF, name='reportePDF'),
+    path('carga/',views.cargaMasiva, name='carga'),
+    path('datosestudiante/',views.infoestudiante, name='datosestudiante'),
+    path('docu/',views.docu, name='docu'),
+    path('pruebamensaje/',views.pruebamsg, name='pruebamsg'),
+    #path('reportePDF.html/',views.reportePDF, name='reportePDF'),
     path('resumenporfecha.html/',views.resumenporfecha, name='resumenporfecha'),
-    path('consulta.html/', views.consulta, name='consulta'),
+    path('consulta/', views.consulta, name='consulta'),
+    path('pdf/', views.reportePDF, name='reporte'),
 
-}
+
+
+]

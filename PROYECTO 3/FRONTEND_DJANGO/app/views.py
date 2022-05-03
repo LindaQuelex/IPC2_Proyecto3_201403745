@@ -1,3 +1,4 @@
+from bdb import GENERATOR_AND_COROUTINE_FLAGS
 from multiprocessing import context
 from urllib import response
 from urllib.request import Request
@@ -5,10 +6,36 @@ from django.shortcuts import render
 import requests
 from app.forms import FileForm
 from xml.etree import ElementTree as ET
+import os
+import webbrowser
+from django.http import FileResponse
+from fpdf import FPDF
 
 
 # Create your views here.
 import requests
+
+
+class PDF(FPDF):
+    pass
+
+    def texts(self, name):
+        with open(name, 'rb') as xy:
+            txt=xy.read().decode('latin-1')
+        self.set_xy(10.0,20.0)
+        self.set_text_color(76.0,32.0,250.0)
+        self.set_font('Arial','', 16)
+        self.multi_cell(0,10,txt)
+
+    def titles(self,title):
+        self.set_xy(0.0,0.0)
+        self.set_font('Arial', 'B',16)
+        self.set_text_color(128,128,128)
+        self.cell(w=210.0,h=20.0,align='C', txt=title, border=0 )
+
+
+        
+
 
 endpoint='http://localhost:4000/'
 def home(request):
@@ -33,7 +60,20 @@ def pruebamsg(request):
      return render(request, "pruebamensaje.html")
 
 def reportePDF(request):
-    pass
+    generarPDF= PDF()
+    generarPDF.add_page()
+    print(generarPDF.texts('C:/Users/Linda Quelex/Desktop/UNIVERSIDAD 2022/LAB IPC2/PROYECTO 3/IPC2_Proyecto3_201403745/PROYECTO 3/ARCHIVO_SALIDA.xml'))
+    generarPDF.titles('REPORTE')
+    generarPDF.output('REPORTE.pdf','F')
+    pdf=open('C:/Users/Linda Quelex/Desktop/UNIVERSIDAD 2022/LAB IPC2/PROYECTO 3/IPC2_Proyecto3_201403745/PROYECTO 3/FRONTEND_DJANGO/REPORTE.pdf','rb')
+
+    return FileResponse(pdf) 
+    
+
+def reset(request):
+    
+    
+    return render(request)
 
 def resumenporfecha(request):
     pass
@@ -84,6 +124,7 @@ def cargaMasiva(request):
                 salida2=salida.read()
                 print (salida2)
                 ctx['response']= salida2
+                
                 
     else: 
         return render(request, 'carga.html')
