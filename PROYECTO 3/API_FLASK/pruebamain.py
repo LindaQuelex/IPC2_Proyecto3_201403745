@@ -144,7 +144,14 @@ def alamacenar_datos_xml():
         idempresa=0
         while idempresa<=tam_lista_empresas:
             name_empresa=empresas.retornarNombreEmpresa(idempresa)
-            empresa_nombre.attrib={'empresa' : name_empresa}
+
+            for x in range(empresas.tamaño_lista_empresas()):
+                usr=ET.SubElement(analisis, 'empresa')
+                #usr.text=str(empresas.retornarNombreEmpresa(idempresa))
+                usr.attrib={'nombre' : str(empresas.retornarNombreEmpresa(idempresa))}
+                empresa_nombre.attrib={'empresa' : str(empresas.retornarNombreEmpresa(idempresa))}
+            tree= ET.ElementTree(root)
+            tree.write("output.xml", encoding='utf-8', xml_declaration=True)
                 # new_rank = int(rank.text) + 1
                 # rank.text = str(new_rank)
                 # rank.set('updated', 'yes')
@@ -167,18 +174,6 @@ def alamacenar_datos_xml():
             # manager.retornar_mensaje(1)
             serch_empresa= re.findall(name_empresa,mensaje_analizar, flags=re.IGNORECASE)
             print('La empresa a analizar es:', serch_empresa)
-
-
-            x=0
-            if serch_empresa!=[]:
-
-               x=+1
-               
-            else:
-                print('xxxxxxxx',x)
-            print('holaaaaa',x)
-
-
 
                 
         
@@ -327,7 +322,9 @@ def alamacenar_datos_xml():
                             idalias+=1
                     
                     idservicio+=1
+            
             idempresa+=1
+           
         else: 
             print('No se analiza el msg',idmensaje,'porque no existe mencion')
         idmensaje+=1
