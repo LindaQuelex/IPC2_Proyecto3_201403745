@@ -56,8 +56,40 @@ def docu(request):
     return render(request, 'docu.html')
 
 def pruebamsg(request):
-     
-     return render(request, "pruebamensaje.html")
+    ctx= {
+        'content': None,
+        'response': None,
+    }
+    if request.method=='POST':
+        form=FileForm(request.POST, request.FILES)
+        if form.is_valid():
+            f = request.FILES['file']
+            print(request.FILES)
+            xml_binary=f.read()#.decode('UTF-8')
+       
+
+            print(xml_binary)
+            xml=xml_binary.decode('UTF-8')
+            ctx['content']=xml
+            response = requests.post(endpoint+'almacenardatosxml', data=xml_binary)
+ 
+            if response.ok:
+                # archivosalida=open('ARCHIVO_SALIDA.xml','w',encoding='utf-8')
+                # archivosalida.close()
+                filename='C:/Users/Linda Quelex/Desktop/UNIVERSIDAD 2022/LAB IPC2/PROYECTO 3/IPC2_Proyecto3_201403745/PROYECTO 3/ARCHIVO_SALIDA.xml'
+                salida =open(filename, encoding='utf-8')
+                salida2=salida.read()
+                print (salida2)
+                ctx['response']= salida2
+            else:
+                ctx['response']='no se pudo realizar el análisis'
+                
+                
+    else: 
+        return render(request, 'pruebamensaje.html')
+
+
+    return render(request, "pruebamensaje.html", ctx)
 
 def reportePDF(request):
     generarPDF= PDF()
@@ -71,9 +103,9 @@ def reportePDF(request):
     
 
 def reset(request):
-    
-    
-    return render(request)
+    with open('C:/Users/Linda Quelex/Desktop/UNIVERSIDAD 2022/LAB IPC2/PROYECTO 3/IPC2_Proyecto3_201403745/PROYECTO 3/ARCHIVO_SALIDA.xml', 'r+') as f:
+        f.truncate(0)
+    return render(request,'carga.html')
 
 def resumenporfecha(request):
     pass

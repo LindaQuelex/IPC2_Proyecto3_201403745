@@ -17,7 +17,13 @@
         <textarea label="textarea" name="textarea2" rows="10" cols="70"></textarea>
     {% endif %}
 </div>
-<button style="background-color: green"  type="submit" class="btn btn-dark btn-lg">Realizar Prueba</button>
+
+<a href="{% url 'pruebamsg' %}">
+    <input type="button" value="Realizar Prueba" style="background-color: green"  class="btn btn-dark btn-lg">
+</a>
+
+
+
 <button style="background-color: red" type="reset" class="btn btn-dark btn-lg">Limpiar</button>
 <a href="{% url 'reporte' %}">
     <input type="button" value="Generar PDF" style="background-color: black" class="btn btn-dark btn-lg">

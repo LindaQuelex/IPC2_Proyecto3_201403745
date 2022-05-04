@@ -13,7 +13,7 @@ urlpatterns=[
     path('resumenporfecha.html/',views.resumenporfecha, name='resumenporfecha'),
     path('consulta/', views.consulta, name='consulta'),
     path('pdf/', views.reportePDF, name='reporte'),
-
+    path('reset/', views.reset, name='reset'),
 
 
 ]

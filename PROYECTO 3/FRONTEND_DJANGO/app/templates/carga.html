@@ -19,7 +19,11 @@
     {% endif %}
 </div>
 <button style="background-color: green"  type="submit" class="btn btn-dark btn-lg">Enviar</button>
-<button style="background-color: red" type="reset" class="btn btn-dark btn-lg">Reset</button>
+
+
+<a href="{% url 'reset' %}">
+    <input type="button" value="Reset" style="background-color: red" class="btn btn-dark btn-lg">
+</a>
 
 <a href="{% url 'reporte' %}">
     <input type="button" value="Generar PDF" style="background-color: black" class="btn btn-dark btn-lg">

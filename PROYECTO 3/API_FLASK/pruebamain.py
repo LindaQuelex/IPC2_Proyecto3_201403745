@@ -145,13 +145,16 @@ def alamacenar_datos_xml():
         while idempresa<=tam_lista_empresas:
             name_empresa=empresas.retornarNombreEmpresa(idempresa)
 
-            for x in range(empresas.tamaño_lista_empresas()):
-                usr=ET.SubElement(analisis, 'empresa')
-                #usr.text=str(empresas.retornarNombreEmpresa(idempresa))
-                usr.attrib={'nombre' : str(empresas.retornarNombreEmpresa(idempresa))}
-                empresa_nombre.attrib={'empresa' : str(empresas.retornarNombreEmpresa(idempresa))}
-            tree= ET.ElementTree(root)
-            tree.write("output.xml", encoding='utf-8', xml_declaration=True)
+            # for x in range(empresas.tamaño_lista_empresas()):
+            #     usr=ET.SubElement(analisis, 'empresa')
+            #     #usr.text=str(empresas.retornarNombreEmpresa(idempresa))
+            #     usr.attrib={'nombre' : str(empresas.retornarNombreEmpresa(idempresa))}
+            #     empresa_nombre.attrib={'empresa' : str(empresas.retornarNombreEmpresa(idempresa))}
+            # tree= ET.ElementTree(root)
+            # tree.write("output.xml", encoding='utf-8', xml_declaration=True)
+
+
+
                 # new_rank = int(rank.text) + 1
                 # rank.text = str(new_rank)
                 # rank.set('updated', 'yes')
@@ -247,6 +250,15 @@ def alamacenar_datos_xml():
                             print('Clasificación: MENSAJE NEUTRO')  
                             contador_mensajes_neutros+=1
                             neutrosmsgservicio.text=str(contador_mensajes_neutros)
+
+                        for x in range(empresas.tamaño_lista_empresas()):
+                            usr=ET.SubElement(analisis, 'empresa')
+                            #usr.text=str(empresas.retornarNombreEmpresa(idempresa))
+                            usr.attrib={'nombre' : str(empresas.retornarNombreEmpresa(idempresa))}
+                            empresa_nombre.attrib={'empresa' : str(empresas.retornarNombreEmpresa(idempresa))}
+                        tree= ET.ElementTree(root)
+                        tree.write("output.xml", encoding='utf-8', xml_declaration=True)
+
                     elif repeticiones_servicio==0:
                         print('no existe servicio en el mensaje, por lo tanto se analizará por alias')
                         tam_lista_alias=empresas.retornarNodoEmpresa(idempresa).Lista_servicios.retornar_nodo_servicio(idservicio).lista_alias.tamaño_lista_alias()
@@ -319,16 +331,42 @@ def alamacenar_datos_xml():
                                 positivosmsgservicio.text="0"
                                 negativosmsgservicio.text="0"
                                 neutrosmsgservicio.text="0"
+                                
+
                             idalias+=1
-                    
+
                     idservicio+=1
             
+            # idempresa+=1
+            else: 
+                usr=ET.SubElement(analisis, 'empresa')
+                            #usr.text=str(empresas.retornarNombreEmpresa(idempresa))
+                usr.attrib={'nombre' : str(empresas.retornarNombreEmpresa(idempresa))}
+                empresa_nombre.attrib={'empresa' : str(empresas.retornarNombreEmpresa(idempresa))}
+                totalmsgempresa.text='cero'
+                mensajeempresa2=ET.SubElement(usr, "mensaje")
+                totalempresa2=ET.SubElement(mensajeempresa2, "total")
+                totalempresa2.text='0'
+                totalpositivos2=ET.SubElement(mensajeempresa2, "positivos")
+                totalpositivos2.text='0'
+                totalnegativos2=ET.SubElement(mensajeempresa2, "negativos")
+                totalnegativos2.text='0'
+                totalneutros2=ET.SubElement(mensajeempresa2, "neutros")
+                totalneutros2.text='0'
+                servicios2=ET.SubElement(usr, "servicios")
+                servicio2=ET.SubElement(servicios2, "servicio")
+
+            idmensaje+=1 
+
             idempresa+=1
            
         else: 
             print('No se analiza el msg',idmensaje,'porque no existe mencion')
+            
         idmensaje+=1
         print('EL ID MENSAJE ES:' ,idmensaje)
+
+        
     # serch_fecha= r''
     # quitar=",;:.\n!¡\"'"
     # for caracter in quitar:
