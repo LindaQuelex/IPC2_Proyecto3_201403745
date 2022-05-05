@@ -11,9 +11,7 @@ from LISTANEGATIVOS import ListaNegativos
 from xml.dom import minidom
 from xml.dom.minidom import parse, parseString
 import xml.dom.minidom
-import xml.dom.minidom
 import re
-import xml 
 
 app=Flask(__name__)
 
@@ -27,7 +25,7 @@ negativos=ListaNegativos()
 def index():
     return "API :)"
 
-@app.route('/almacenardatosxml', methods=['POST'])
+@app.route('/almacenardatosxml', methods=['GET'])
 def alamacenar_datos_xml():
     print('\n','****ENCABEZADOS****','\n')
     print(request.headers)
@@ -83,42 +81,8 @@ def alamacenar_datos_xml():
         contador+=1
 
     empresas.mostrar_empresas()   #prueba de datos cargados en TDA´s
-    #INICIA LA ESTRUCTURA DEL ARCHIVO XML DE SALIDA
-   
-    root = ET.Element("lista_respuestas")
-    respuesta = ET.SubElement(root, "respuesta")
-    fecha = ET.SubElement(respuesta, "fecha") 
-    mensajesmsg=ET.SubElement(respuesta, "mensajes")
-    totalmensajes=ET.SubElement(mensajesmsg, "total")
-    positivosmensajes=ET.SubElement(mensajesmsg, "positivos")
-    #positivosmensajes.text="número positivos"
-    negativosmensajes=ET.SubElement(mensajesmsg, "negativos")
-    #negativosmensajes.text="número negativos"
-    neutrosmensajes=ET.SubElement(mensajesmsg, "neutros")
-    #neutrosmensajes.text="número neutros"
-    analisis=ET.SubElement(respuesta, "analisis")
-    empresa_nombre=ET.SubElement(analisis, "empresa")
-    mensajesempresa=ET.SubElement(empresa_nombre, "mensajes")
-    totalmsgempresa=ET.SubElement(mensajesempresa, "total")
-    #totalmsgempresa.text="número total"
-    positivosmsgempresa=ET.SubElement(mensajesempresa, "positivos")
-    #positivosmsgempresa.text="número positivos"
-    negativosmsgempresa=ET.SubElement(mensajesempresa, "negativos")
-    #negativosmsgempresa.text="número negativos"
-    neutrosmsgempresa=ET.SubElement(mensajesempresa, "neutros")
-    #neutrosmsgempresa.text="número neutros"
-    servicios=ET.SubElement(empresa_nombre, "servicios")
-    servicio=ET.SubElement(servicios, "servicio")
-    mensajesservicio=ET.SubElement(servicio, "mensajes")
-    totalmsgservicio=ET.SubElement(mensajesservicio, "total")
-    #totalmsgservicio.text="número total"                 
-    positivosmsgservicio=ET.SubElement(mensajesservicio, "positivos")
-    negativosmsgservicio=ET.SubElement(mensajesservicio, "negativos")
-    neutrosmsgservicio=ET.SubElement(mensajesservicio, "neutros")
-
     #INICIA EL ANÁLISIS DE LOS DATOS XML
     tam_list_mensajes=manager.tamaño_lista_mensajes()
-    totalmensajes.text=str(tam_list_mensajes)
     print('TAMAÑO DE LISTA DE MENSAJES', tam_list_mensajes)
     idmensaje=0
     while idmensaje<tam_list_mensajes: 
@@ -140,24 +104,9 @@ def alamacenar_datos_xml():
         print('MENSAJES SIN SIGNOS NI TILDES:    ',mensaje_analizar)
         tam_lista_empresas=empresas.tamaño_lista_empresas()
         print('El tamaño de la lista empresas es: ', tam_lista_empresas)
-        fecha.text= "fechas"
         idempresa=0
         while idempresa<=tam_lista_empresas:
             name_empresa=empresas.retornarNombreEmpresa(idempresa)
-
-            # for x in range(empresas.tamaño_lista_empresas()):
-            #     usr=ET.SubElement(analisis, 'empresa')
-            #     #usr.text=str(empresas.retornarNombreEmpresa(idempresa))
-            #     usr.attrib={'nombre' : str(empresas.retornarNombreEmpresa(idempresa))}
-            #     empresa_nombre.attrib={'empresa' : str(empresas.retornarNombreEmpresa(idempresa))}
-            # tree= ET.ElementTree(root)
-            # tree.write("output.xml", encoding='utf-8', xml_declaration=True)
-
-
-
-                # new_rank = int(rank.text) + 1
-                # rank.text = str(new_rank)
-                # rank.set('updated', 'yes')
             quitar=";;:,.\n!\"'"
             for caracter in quitar:
                 name_empresa=name_empresa.replace(caracter,"")
@@ -177,9 +126,6 @@ def alamacenar_datos_xml():
             # manager.retornar_mensaje(1)
             serch_empresa= re.findall(name_empresa,mensaje_analizar, flags=re.IGNORECASE)
             print('La empresa a analizar es:', serch_empresa)
-
-                
-        
             cantidad_empresa=len(re.findall(name_empresa,mensaje_analizar, flags=re.IGNORECASE))
             print('cantidad de repeticiones de la empresa en el mensaje=',cantidad_empresa)
             if cantidad_empresa>0:
@@ -189,7 +135,6 @@ def alamacenar_datos_xml():
                 idservicio=0
                 while idservicio<=tam_lista_servicios:
                     name_servicio=empresas.retornarNodoEmpresa(idempresa).Lista_servicios.retornarNombreServicio(idservicio)
-                    servicio.attrib={'servicio':name_servicio}
                     quitar=";;:,.\n!\"'"
                     for caracter in quitar:
                         name_servicio=name_servicio.replace(caracter,"")
@@ -235,30 +180,12 @@ def alamacenar_datos_xml():
                             conteonegativos+=serch_negativo_msg
                         totalnegativos=conteonegativos
                         print('TOTAL DE NEGATIVOS EN EL MENSAJE=',totalnegativos)
-                        contador_mensajes_positivos=0
-                        contador_memsajes_negativos=0
-                        contador_mensajes_neutros=0
                         if totalpositivos>totalnegativos:
                             print('Clasificación: MENSAJE POSITIVO :)')
-                            contador_mensajes_positivos+=1
-                            positivosmsgservicio.text=str(contador_mensajes_positivos)
                         elif totalpositivos< totalnegativos:
                             print('Clasificación: MENSAJE NEGATIVO :(')
-                            contador_memsajes_negativos+=1
-                            negativosmsgservicio.text=str(contador_memsajes_negativos)
                         else:
-                            print('Clasificación: MENSAJE NEUTRO')  
-                            contador_mensajes_neutros+=1
-                            neutrosmsgservicio.text=str(contador_mensajes_neutros)
-
-                        for x in range(empresas.tamaño_lista_empresas()):
-                            usr=ET.SubElement(analisis, 'empresa')
-                            #usr.text=str(empresas.retornarNombreEmpresa(idempresa))
-                            usr.attrib={'nombre' : str(empresas.retornarNombreEmpresa(idempresa))}
-                            empresa_nombre.attrib={'empresa' : str(empresas.retornarNombreEmpresa(idempresa))}
-                        tree= ET.ElementTree(root)
-                        tree.write("output.xml", encoding='utf-8', xml_declaration=True)
-
+                            print('Clasificación: MENSAJE NEUTRO')           
                     elif repeticiones_servicio==0:
                         print('no existe servicio en el mensaje, por lo tanto se analizará por alias')
                         tam_lista_alias=empresas.retornarNodoEmpresa(idempresa).Lista_servicios.retornar_nodo_servicio(idservicio).lista_alias.tamaño_lista_alias()
@@ -316,77 +243,31 @@ def alamacenar_datos_xml():
                                 if totalpositivos2>totalnegativos2:
                                     print('Clasificación: MENSAJE POSITIVO :)')
                                     contador_mensajes_positivos+=1
-                                    positivosmsgservicio.text=str(contador_mensajes_positivos)
                                 elif totalpositivos2< totalnegativos2:
                                     print('Clasificación: MENSAJE NEGATIVO :(')
                                     contador_memsajes_negativos+=1
-                                    negativosmsgservicio.text=str(contador_memsajes_negativos)
                                 else:
                                     print('Clasificación: MENSAJE NEUTRO')
                                     contador_mensajes_neutros+=1
-                                    neutrosmsgservicio.text=str(contador_mensajes_neutros)
                             if repeticiones_alias==0:
                                 print('no exite alias en el mensaje, por lo tanto no se analiza')
-                                totalmsgservicio.text="0"
-                                positivosmsgservicio.text="0"
-                                negativosmsgservicio.text="0"
-                                neutrosmsgservicio.text="0"
-                                
-
                             idalias+=1
-
                     idservicio+=1
-            
-            # idempresa+=1
-            else: 
-                usr=ET.SubElement(analisis, 'empresa')
-                            #usr.text=str(empresas.retornarNombreEmpresa(idempresa))
-                usr.attrib={'nombre' : str(empresas.retornarNombreEmpresa(idempresa))}
-                empresa_nombre.attrib={'empresa' : str(empresas.retornarNombreEmpresa(idempresa))}
-                totalmsgempresa.text='cero'
-                mensajeempresa2=ET.SubElement(usr, "mensaje")
-                totalempresa2=ET.SubElement(mensajeempresa2, "total")
-                totalempresa2.text='0'
-                totalpositivos2=ET.SubElement(mensajeempresa2, "positivos")
-                totalpositivos2.text='0'
-                totalnegativos2=ET.SubElement(mensajeempresa2, "negativos")
-                totalnegativos2.text='0'
-                totalneutros2=ET.SubElement(mensajeempresa2, "neutros")
-                totalneutros2.text='0'
-                servicios2=ET.SubElement(usr, "servicios")
-                servicio2=ET.SubElement(servicios2, "servicio")
-
-            idmensaje+=1 
-
             idempresa+=1
-           
         else: 
             print('No se analiza el msg',idmensaje,'porque no existe mencion')
-            
         idmensaje+=1
         print('EL ID MENSAJE ES:' ,idmensaje)
-
-        
     # serch_fecha= r''
     # quitar=",;:.\n!¡\"'"
     # for caracter in quitar:
     #     mensaje_analizar=mensaje_analizar.replace(caracter,"")
 
-
     # print(manager.get_sentimientos_positivos())
     # print(manager.get_sentimientos_negativos())
     # print(manager.get_mensajes())
-
-    xml_str = ET.tostring(root, encoding='utf-8', method='xml').decode('utf-8')
-    xmlparse= minidom.parseString(xml_str)
-    prettyxml = xmlparse.toprettyxml()
-    print(prettyxml)
-     
-    archivosalida=open('ARCHIVO_SALIDA.xml','w',encoding='utf-8')
-    archivosalida.write(prettyxml)
-    archivosalida.close()
   
-    return jsonify ({'ok':True,'msg':'prueba de funcionamiento de del método "almacenar_datos_xml" de la API'}),200
+    return jsonify ({'msg':'prueba de funcionamiento de del método "almacenar_datos_xml" de la API'}),200
 
 @app.route('/showpositivos', methods=['GET'])
 def get_positivos():
@@ -398,16 +279,10 @@ def get_negativos():
     c2=manager.get_sentimientos_negativos()
     return jsonify(c2),200
 
-@app.route('/retornar', methods=['GET'])
+@app.route('/retornarcontenidoxml', methods=['GET'])
 def retornar_cont_xml():
-    c3=manager.get_mensajes()
     c2=manager.get_sentimientos_negativos()
-    c =manager.get_sentimientos_positivos()
-    c4= empresas.mostrar_empresas_json()
-    
-    return jsonify(c3,c2,c,c4),200
-
-
+    return jsonify(c2),200
 
 @app.route('/crearxml', methods=['GET'])
 def crearxml():

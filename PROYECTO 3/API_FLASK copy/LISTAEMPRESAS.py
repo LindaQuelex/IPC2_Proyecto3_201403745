@@ -46,14 +46,3 @@ class ListaEmpresas():
         #print(idultimo)
         return idultimo
 
-    def mostrar_empresas_json(self):
-        tmp=self.primero
-        json=[]
-        for i in range(self.size):
-            empresa={
-                'empresa':tmp.getnombre_empresa(),                
-                #tmp.Lista_servicios.retornarNombreServicio()
-            }
-            json.append(empresa)
-            tmp = tmp.getsiguiente()
-        return json

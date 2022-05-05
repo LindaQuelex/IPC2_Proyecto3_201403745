@@ -61,17 +61,7 @@ class ListaServicios():
         return idultimo
       
 
-    def mostrar_servicios_json(self):
-        tmp=self.primero
-        json=[]
-        for i in range(self.size):
-            servicio={
-                'servicio':tmp.getservicio(),                
-                #tmp.Lista_servicios.retornarNombreServicio()
-            }
-            json.append(servicio)
-            tmp = tmp.getsiguiente()
-        return json
+
 
 # nodo=ListaServicios()
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<respuesta>
+	<fecha/>
+	<red_social/>
+	<usuario/>
+	<empresas>
+		<empresa>
+			<servicio/>
+		</empresa>
+	</empresas>
+	<palabras_positivas/>
+	<palabras_negativas/>
+	<sentimiento_positivo/>
+	<sentimiento_negativo/>
+	<sentimiento_analizado/>
+</respuesta>
