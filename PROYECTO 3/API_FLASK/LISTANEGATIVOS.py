@@ -21,9 +21,12 @@ class ListaNegativos():
 
     def mostrar_negativos(self):
         tmp=self.primero
-        for i in range(self.size):
-            print("     ",i,'La palabra negativa es:', tmp.getpalabranegativa())
-            tmp = tmp.getsiguiente() 
+        if tmp!=None:
+            for i in range(self.size):
+                print("     ",i,'La palabra negativa es:', tmp.getpalabranegativa())
+                tmp = tmp.getsiguiente() 
+        else:
+            print('lista negativos vacía')
 
     def retornar_nodo(self, id):
         aux=self.primero
@@ -32,3 +35,9 @@ class ListaNegativos():
         palabranegativa= aux.palabranegativa
         return palabranegativa
 
+    def vaciar_lista_negativos(self):
+        self.primero=None
+        self.ultimo=None
+
+
+        return True

@@ -75,7 +75,17 @@ class Manager():
         normalized=unicodedata.normalize('NFD', string)
         return normalized.encode('ascii', 'ignore').decode('utf-8').casefold()
 
-        
+    def vaciar_positivos(self):
+        self.lista_positivos.clear()
+        return True
+
+    def vaciar_negativos(self):
+        self.lista_negativos.clear()
+        return True
+
+    def vaciar_mensajes(self):
+        self.lista_mensajes.clear()
+        return True
 
 
 # string1='hola'

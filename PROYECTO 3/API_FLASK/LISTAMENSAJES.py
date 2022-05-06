@@ -21,9 +21,12 @@ class ListaMsg():
 
     def mostrar_mensaje(self):
         tmp=self.primero
-        for i in range(self.size):
-            print("     ",i,'El mensaje es:', tmp.gettextomensaje())
-            tmp = tmp.getsiguiente() 
+        if tmp!=None:
+            for i in range(self.size):
+                print("     ",i,'El mensaje es:', tmp.gettextomensaje())
+                tmp = tmp.getsiguiente() 
+        else: 
+            print('lista mensajes vacía')
 
     def retornar_nodo(self, id):
         aux=self.primero
@@ -32,3 +35,9 @@ class ListaMsg():
         msg= aux.textomensaje
         return msg
 
+    def vaciar_lista_msg(self):
+        self.primero=None
+        self.ultimo=None
+
+
+        return True

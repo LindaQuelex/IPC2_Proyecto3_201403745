@@ -21,9 +21,12 @@ class ListaPositivos():
 
     def mostrar_positivos(self):
         tmp=self.primero
-        for i in range(self.size):
-            print("     ",i,'La palabra positiva es:', tmp.getpalabrapositiva())
-            tmp = tmp.getsiguiente() 
+        if tmp!=None:
+            for i in range(self.size):
+                print("     ",i,'La palabra positiva es:', tmp.getpalabrapositiva())
+                tmp = tmp.getsiguiente() 
+        else:
+            print('lista positivos vacía')
 
     def retornar_nodo(self, id):
         aux=self.primero
@@ -32,3 +35,9 @@ class ListaPositivos():
         palabrapositiva= aux.palabrapositiva
         return palabrapositiva
 
+    def vaciar_lista_positivos(self):
+        self.primero=None
+        self.ultimo=None
+
+
+        return True

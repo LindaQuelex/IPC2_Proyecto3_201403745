@@ -31,9 +31,13 @@ class ListaAlias():
 
     def mostrar_alias(self):
         tmp=self.primero
-        for i in range(self.size):
-            print("     ",i,'El alias es:', tmp.getalias())
-            tmp = tmp.getsiguiente() 
+      
+        if tmp!=None:
+            for i in range(self.size):
+                print("     ",i,'El alias es:', tmp.getalias())
+                tmp = tmp.getsiguiente() 
+        else:
+            print('lista vacía')
 
     def retornar_nodo(self, id):
         aux=self.primero
@@ -69,7 +73,12 @@ class ListaAlias():
             print('no existen alias para el servicio')
             return aux
       
+    def vaciar_lista_alias(self):
+        self.primero=None
+        self.ultimo=None
 
+
+        return True
 
 # nodo=ListaAlias()
 
@@ -86,7 +95,12 @@ class ListaAlias():
 # # nodo.retornar_nodo(2)
 
 # nodo.tamaño_lista_alias()
-# nodo.retornarNombreAlias(2)
+# nodo.retornarNombreAlias(0)
+
+
+# nodo.vaciar_lista_alias()
+
+# nodo.mostrar_alias()
 
 
 

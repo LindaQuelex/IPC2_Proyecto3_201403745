@@ -371,5 +371,11 @@ def alamacenar_datos_xml():
   
     return jsonify ({'ok':True,'msg':'prueba de funcionamiento de del método "pruebamensaje" de la API'}),200
 
+
+
+
+
+
+
 if __name__=="__main__":
     app.run(host='localhost',debug=True, port=5000)

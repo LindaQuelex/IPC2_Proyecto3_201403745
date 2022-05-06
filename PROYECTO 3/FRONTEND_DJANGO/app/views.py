@@ -51,8 +51,9 @@ def infoestudiante(request):
     return render(request,'datosestudiante.html')
 
 def docu(request):
-    
-    return render(request, 'docu.html')
+    pdf2=open('C:/Users/Linda Quelex/Desktop/UNIVERSIDAD 2022/LAB IPC2/PROYECTO 3/IPC2_Proyecto3_201403745/PROYECTO 3/FormatoArticuloEnsayo-IPC2-lab_201403745.pdf','rb')
+
+    return FileResponse(pdf2) 
 
 def pruebamsg(request):
     ctx= {

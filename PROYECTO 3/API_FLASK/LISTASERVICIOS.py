@@ -31,11 +31,14 @@ class ListaServicios():
 
     def mostrar_servicios(self):
         tmp=self.primero
-        for i in range(self.size):
-            print(i,'Servicio:',tmp.getservicio())
-            tmp.lista_alias.mostrar_alias()
-            tmp = tmp.getsiguiente()
-    
+        if tmp!=None:
+            for i in range(self.size):
+                print(i,'Servicio:',tmp.getservicio())
+                tmp.lista_alias.mostrar_alias()
+                tmp = tmp.getsiguiente()
+        else:
+            print('lista de servicios vacía')
+        
     
     # def recorrer_lista(self):
     #     if self.iniciarnodoservicio is None:
@@ -72,6 +75,13 @@ class ListaServicios():
             json.append(servicio)
             tmp = tmp.getsiguiente()
         return json
+
+
+    def vaciar_lista_servicios(self):
+        self.primero=None
+        self.ultimo=None
+
+        return True
 
 # nodo=ListaServicios()
 

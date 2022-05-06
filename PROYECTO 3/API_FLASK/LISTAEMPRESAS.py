@@ -27,10 +27,13 @@ class ListaEmpresas():
 
     def mostrar_empresas(self):
         tmp=self.primero
-        for i in range(self.size):
-            print(i,'El nombre de la empresa es:', tmp.getnombre_empresa())
-            tmp.Lista_servicios.mostrar_servicios()
-            tmp = tmp.getsiguiente()
+        if tmp!=None:
+            for i in range(self.size):
+                print(i,'El nombre de la empresa es:', tmp.getnombre_empresa())
+                tmp.Lista_servicios.mostrar_servicios()
+                tmp = tmp.getsiguiente()
+        else:
+            print('lista empresas vacía')
 
     def retornarNombreEmpresa(self,id):
         aux = self.primero
@@ -57,3 +60,9 @@ class ListaEmpresas():
             json.append(empresa)
             tmp = tmp.getsiguiente()
         return json
+
+
+    def vaciar_lista_empresa(self):
+        self.primero=None
+        self.ultimo=None
+        return True

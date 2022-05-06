@@ -404,8 +404,19 @@ def retornar_cont_xml():
     c2=manager.get_sentimientos_negativos()
     c =manager.get_sentimientos_positivos()
     c4= empresas.mostrar_empresas_json()
-    
     return jsonify(c3,c2,c,c4),200
+
+@app.route('/reset', methods=['POST'])
+def reset():
+    uno=manager.vaciar_positivos()
+    dos=manager.vaciar_negativos()
+    tres=manager.vaciar_mensajes()
+    cuatro=empresas.vaciar_lista_empresa()
+    cinco=msg.vaciar_lista_msg()
+    seis=positivos.vaciar_lista_positivos()
+    siete=negativos.vaciar_lista_negativos()
+
+    return jsonify ({'msg':'LISTAS VACÍAS','lista empresas':cuatro,'lista mensajes':cinco,'lista positivos':seis,'lista negativos': siete}),200
 
 
 
