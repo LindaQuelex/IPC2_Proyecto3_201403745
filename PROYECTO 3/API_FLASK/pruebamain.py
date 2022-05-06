@@ -95,8 +95,6 @@ def alamacenar_datos_xml():
     neutrosmensajes=ET.SubElement(mensajesmsg, "neutros")
     analisis=ET.SubElement(respuesta, "analisis")
 
-
-
     #INICIA EL ANÁLISIS DE LOS DATOS XML
     tam_list_mensajes=manager.tamaño_lista_mensajes()
     totalmensajes.text=str(tam_list_mensajes)
@@ -133,8 +131,6 @@ def alamacenar_datos_xml():
             #     empresa_nombre.attrib={'empresa' : str(empresas.retornarNombreEmpresa(idempresa))}
             # tree= ET.ElementTree(root)
             # tree.write("output.xml", encoding='utf-8', xml_declaration=True)
-
-
 
                 # new_rank = int(rank.text) + 1
                 # rank.text = str(new_rank)
