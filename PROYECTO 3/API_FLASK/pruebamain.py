@@ -91,30 +91,11 @@ def alamacenar_datos_xml():
     mensajesmsg=ET.SubElement(respuesta, "mensajes")
     totalmensajes=ET.SubElement(mensajesmsg, "total")
     positivosmensajes=ET.SubElement(mensajesmsg, "positivos")
-    #positivosmensajes.text="número positivos"
     negativosmensajes=ET.SubElement(mensajesmsg, "negativos")
-    #negativosmensajes.text="número negativos"
     neutrosmensajes=ET.SubElement(mensajesmsg, "neutros")
-    #neutrosmensajes.text="número neutros"
     analisis=ET.SubElement(respuesta, "analisis")
-    empresa_nombre=ET.SubElement(analisis, "empresa")
-    mensajesempresa=ET.SubElement(empresa_nombre, "mensajes")
-    totalmsgempresa=ET.SubElement(mensajesempresa, "total")
-    #totalmsgempresa.text="número total"
-    positivosmsgempresa=ET.SubElement(mensajesempresa, "positivos")
-    #positivosmsgempresa.text="número positivos"
-    negativosmsgempresa=ET.SubElement(mensajesempresa, "negativos")
-    #negativosmsgempresa.text="número negativos"
-    neutrosmsgempresa=ET.SubElement(mensajesempresa, "neutros")
-    #neutrosmsgempresa.text="número neutros"
-    servicios=ET.SubElement(empresa_nombre, "servicios")
-    servicio=ET.SubElement(servicios, "servicio")
-    mensajesservicio=ET.SubElement(servicio, "mensajes")
-    totalmsgservicio=ET.SubElement(mensajesservicio, "total")
-    #totalmsgservicio.text="número total"                 
-    positivosmsgservicio=ET.SubElement(mensajesservicio, "positivos")
-    negativosmsgservicio=ET.SubElement(mensajesservicio, "negativos")
-    neutrosmsgservicio=ET.SubElement(mensajesservicio, "neutros")
+
+
 
     #INICIA EL ANÁLISIS DE LOS DATOS XML
     tam_list_mensajes=manager.tamaño_lista_mensajes()
@@ -258,7 +239,7 @@ def alamacenar_datos_xml():
                             usr=ET.SubElement(analisis, 'empresa')
                             #usr.text=str(empresas.retornarNombreEmpresa(idempresa))
                             usr.attrib={'nombre' : str(empresas.retornarNombreEmpresa(idempresa))}
-                            empresa_nombre.attrib={'empresa' : str(empresas.retornarNombreEmpresa(idempresa))}
+                            #empresa_nombre.attrib={'empresa' : str(empresas.retornarNombreEmpresa(idempresa))}
 
                         #     totalp=contador_memsajes_negativos+contador_mensajes_positivos+contador_mensajes_neutros
                             #mensajeempresa2=ET.SubElement(usr, "mensaje")
@@ -335,21 +316,21 @@ def alamacenar_datos_xml():
                                 if totalpositivos2>totalnegativos2:
                                     print('Clasificación: MENSAJE POSITIVO :)')
                                     contador_mensajes_positivos2+=1
-                                    positivosmsgservicio.text=str(contador_mensajes_positivos2)
+                                    # positivosmsgservicio.text=str(contador_mensajes_positivos2)
                                 elif totalpositivos2< totalnegativos2:
                                     print('Clasificación: MENSAJE NEGATIVO :(')
                                     contador_memsajes_negativos2+=1
-                                    negativosmsgservicio.text=str(contador_memsajes_negativos2)
+                                    # negativosmsgservicio.text=str(contador_memsajes_negativos2)
                                 else:
                                     print('Clasificación: MENSAJE NEUTRO')
                                     contador_mensajes_neutros2+=1
-                                    neutrosmsgservicio.text=str(contador_mensajes_neutros2)
+                                    # neutrosmsgservicio.text=str(contador_mensajes_neutros2)
                             if repeticiones_alias==0:
                                 print('no exite alias en el mensaje, por lo tanto no se analiza')
-                                totalmsgservicio.text="0"
-                                positivosmsgservicio.text="0"
-                                negativosmsgservicio.text="0"
-                                neutrosmsgservicio.text="0"
+                                # totalmsgservicio.text="0"
+                                # positivosmsgservicio.text="0"
+                                # negativosmsgservicio.text="0"
+                                # neutrosmsgservicio.text="0"
                                 
                             idalias+=1
                     #aqui debería ir la creación de etiquetas
@@ -386,8 +367,8 @@ def alamacenar_datos_xml():
                 usr=ET.SubElement(analisis, 'empresa')
                             #usr.text=str(empresas.retornarNombreEmpresa(idempresa))
                 usr.attrib={'nombre' : str(empresas.retornarNombreEmpresa(idempresa))}
-                empresa_nombre.attrib={'empresa' : str(empresas.retornarNombreEmpresa(idempresa))}
-                totalmsgempresa.text='cero'
+                # empresa_nombre.attrib={'empresa' : str(empresas.retornarNombreEmpresa(idempresa))}
+                # totalmsgempresa.text='cero'
                 mensajeempresa2=ET.SubElement(usr, "mensaje")
                 totalempresa2=ET.SubElement(mensajeempresa2, "total")
                 totalempresa2.text='0'
