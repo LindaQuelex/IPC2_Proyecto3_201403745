@@ -75,7 +75,7 @@ def pruebamsg(request):
             if response.ok:
                 # archivosalida=open('ARCHIVO_SALIDA.xml','w',encoding='utf-8')
                 # archivosalida.close()
-                filename='C:/Users/Linda Quelex/Desktop/UNIVERSIDAD 2022/LAB IPC2/PROYECTO 3/IPC2_Proyecto3_201403745/PROYECTO 3/ARCHIVO_SALIDA_PRUEBAMSG.xml'
+                filename='C:/Users/Linda Quelex/Desktop/UNIVERSIDAD 2022/LAB IPC2/PROYECTO 3/IPC2_Proyecto3_201403745/PROYECTO 3/ARCHIVO_SALIDA_PRUEBA.xml'
                 salida =open(filename, encoding='utf-8')
                 salida2=salida.read()
                 print (salida2)

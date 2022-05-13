@@ -1,65 +1,61 @@
 <?xml version="1.0" ?>
 <lista_respuestas>
 	<respuesta>
-		<fecha>fechas</fecha>
+		<fecha>['24/04/2022']</fecha>
 		<mensajes>
-			<total>3</total>
+			<total>4</total>
 			<positivos/>
 			<negativos/>
 			<neutros/>
 		</mensajes>
 		<analisis>
-			<empresa nombre=" USAC ">
+			<empresa nombre=" McDonals "/>
+			<empresa nombre=" McDonals ">
 				<mensajes>
-					<total>1</total>
+					<total>4</total>
 					<positivos>1</positivos>
 					<negativos>0</negativos>
 					<neutros>0</neutros>
 				</mensajes>
 				<servicios>
-					<servicio nombre="inscripcion">
+					<servicio nombre="servicio">
 						<mensajes>
-							<total/>
-							<positivos/>
-							<negativos/>
-							<neutros/>
+							<total>2</total>
+							<positivos>1</positivos>
+							<negativos>2</negativos>
+							<neutros>1</neutros>
 						</mensajes>
 					</servicio>
 				</servicios>
 				<mensajes>
-					<total>1</total>
+					<total>4</total>
 					<positivos>1</positivos>
 					<negativos>0</negativos>
 					<neutros>0</neutros>
 				</mensajes>
 				<servicios>
-					<servicio nombre="asignacion">
+					<servicio nombre="servicio">
 						<mensajes>
-							<total/>
-							<positivos/>
-							<negativos/>
-							<neutros/>
-						</mensajes>
-					</servicio>
-				</servicios>
-				<mensajes>
-					<total>1</total>
-					<positivos>1</positivos>
-					<negativos>0</negativos>
-					<neutros>0</neutros>
-				</mensajes>
-				<servicios>
-					<servicio nombre="graduacion">
-						<mensajes>
-							<total/>
-							<positivos/>
-							<negativos/>
-							<neutros/>
+							<total>2</total>
+							<positivos>1</positivos>
+							<negativos>2</negativos>
+							<neutros>1</neutros>
 						</mensajes>
 					</servicio>
 				</servicios>
 			</empresa>
-			<empresa nombre=" IGSS ">
+			<empresa nombre=" Burguer  King ">
+				<mensaje>
+					<total>0</total>
+					<positivos>0</positivos>
+					<negativos>0</negativos>
+					<neutros>0</neutros>
+				</mensaje>
+				<servicios>
+					<servicio/>
+				</servicios>
+			</empresa>
+			<empresa nombre=" Carls Jr ">
 				<mensaje>
 					<total>0</total>
 					<positivos>0</positivos>
